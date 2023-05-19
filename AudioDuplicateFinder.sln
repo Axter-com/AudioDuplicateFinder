@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33513.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioDuplicateFinder", "AudioDuplicateFinder\AudioDuplicateFinder.csproj", "{52AC49B0-A00F-4886-B388-03E412EFABC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AudioDuplicateFinder", "AudioDuplicateFinder\AudioDuplicateFinder.csproj", "{B46BB7CC-D424-4D05-B6A6-CD31A434E833}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{4335C35C-C2D5-45C7-B8DB-D2303ECE160E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AudioDuplicateFinder.Core", "AudioDuplicateFinder.Core\AudioDuplicateFinder.Core.csproj", "{CABBBDC6-1922-42AD-B29A-CACA52C84571}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{405B5C14-1C30-4A59-8C09-A7ECC5F0EBAB}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		ConvertAudioFileToSimpleWav.cmd = ConvertAudioFileToSimpleWav.cmd
@@ -20,15 +22,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{52AC49B0-A00F-4886-B388-03E412EFABC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52AC49B0-A00F-4886-B388-03E412EFABC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52AC49B0-A00F-4886-B388-03E412EFABC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52AC49B0-A00F-4886-B388-03E412EFABC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B46BB7CC-D424-4D05-B6A6-CD31A434E833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B46BB7CC-D424-4D05-B6A6-CD31A434E833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B46BB7CC-D424-4D05-B6A6-CD31A434E833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B46BB7CC-D424-4D05-B6A6-CD31A434E833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CABBBDC6-1922-42AD-B29A-CACA52C84571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CABBBDC6-1922-42AD-B29A-CACA52C84571}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CABBBDC6-1922-42AD-B29A-CACA52C84571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CABBBDC6-1922-42AD-B29A-CACA52C84571}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7355C234-C5AE-4770-9D5D-34A3D016AD5C}
+		SolutionGuid = {ACF18EF4-6E4F-4DE9-BC06-715F3CDD0BA9}
 	EndGlobalSection
 EndGlobal
