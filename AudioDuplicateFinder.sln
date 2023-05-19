@@ -5,6 +5,15 @@ VisualStudioVersion = 17.6.33513.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioDuplicateFinder", "AudioDuplicateFinder\AudioDuplicateFinder.csproj", "{52AC49B0-A00F-4886-B388-03E412EFABC3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{4335C35C-C2D5-45C7-B8DB-D2303ECE160E}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		ConvertAudioFileToSimpleWav.cmd = ConvertAudioFileToSimpleWav.cmd
+		Release.cmd = Release.cmd
+		release_minor_version.txt = release_minor_version.txt
+		release_variables.txt = release_variables.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
