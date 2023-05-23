@@ -69,7 +69,7 @@ public class ShellViewModel : ObservableObject
     }
 
     private void OnMenuFileExit()
-        => Application.Current.Shutdown();
+        => System.Windows.Application.Current.Shutdown();
 
     public ICommand MenuViewsMainCommand => _menuViewsMainCommand ?? (_menuViewsMainCommand = new RelayCommand(OnMenuViewsMain));
 

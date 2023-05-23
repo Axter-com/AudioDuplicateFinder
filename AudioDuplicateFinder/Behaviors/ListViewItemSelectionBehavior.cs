@@ -6,7 +6,7 @@ using Microsoft.Xaml.Behaviors;
 
 namespace AudioDuplicateFinder.Behaviors;
 
-public class ListViewItemSelectionBehavior : Behavior<ListView>
+public class ListViewItemSelectionBehavior : Behavior<System.Windows.Controls.ListView>
 {
     public ICommand Command
     {
@@ -19,7 +19,7 @@ public class ListViewItemSelectionBehavior : Behavior<ListView>
     protected override void OnAttached()
     {
         base.OnAttached();
-        var listView = AssociatedObject as ListView;
+        var listView = AssociatedObject as System.Windows.Controls.ListView;
         listView.PreviewMouseLeftButtonDown += OnPreviewMouseLeftButtonDown;
         listView.KeyDown += OnKeyDown;
     }
@@ -27,7 +27,7 @@ public class ListViewItemSelectionBehavior : Behavior<ListView>
     protected override void OnDetaching()
     {
         base.OnDetaching();
-        var listView = AssociatedObject as ListView;
+        var listView = AssociatedObject as System.Windows.Controls.ListView;
         listView.PreviewMouseLeftButtonDown -= OnPreviewMouseLeftButtonDown;
         listView.KeyDown -= OnKeyDown;
     }
@@ -35,7 +35,7 @@ public class ListViewItemSelectionBehavior : Behavior<ListView>
     private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         => SelectItem(e);
 
-    private void OnKeyDown(object sender, KeyEventArgs e)
+    private void OnKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
         if (e.Key == Key.Enter)
         {

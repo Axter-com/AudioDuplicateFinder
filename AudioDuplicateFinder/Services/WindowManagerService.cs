@@ -16,7 +16,7 @@ public class WindowManagerService : IWindowManagerService
     private readonly IPageService _pageService;
 
     public Window MainWindow
-        => Application.Current.MainWindow;
+        => System.Windows.Application.Current.MainWindow;
 
     public WindowManagerService(IServiceProvider serviceProvider, IPageService pageService)
     {
@@ -36,7 +36,7 @@ public class WindowManagerService : IWindowManagerService
             window = new MetroWindow()
             {
                 Title = "AudioDuplicateFinder",
-                Style = Application.Current.FindResource("CustomMetroWindow") as Style
+                Style = System.Windows.Application.Current.FindResource("CustomMetroWindow") as Style
             };
             var frame = new Frame()
             {
@@ -66,7 +66,7 @@ public class WindowManagerService : IWindowManagerService
 
     public Window GetWindow(string key)
     {
-        foreach (Window window in Application.Current.Windows)
+        foreach (Window window in System.Windows.Application.Current.Windows)
         {
             var dataContext = window.GetDataContext();
             if (dataContext?.GetType().FullName == key)

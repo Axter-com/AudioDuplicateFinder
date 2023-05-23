@@ -10,7 +10,8 @@
 
 namespace AudioDuplicateFinder.Properties {
     using System;
-
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -18,19 +19,19 @@ namespace AudioDuplicateFinder.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
-
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -44,7 +45,7 @@ namespace AudioDuplicateFinder.Properties {
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -58,357 +59,381 @@ namespace AudioDuplicateFinder.Properties {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to ts.ItemName.
+        ///   Looks up a localized string similar to AudioDuplicateFinder.
         /// </summary>
         public static string AppDisplayName {
             get {
                 return ResourceManager.GetString("AppDisplayName", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to ShellGoBackButton.
+        ///   Looks up a localized string similar to Blank.
+        /// </summary>
+        public static string BlankPageTitle {
+            get {
+                return ResourceManager.GetString("BlankPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ContentGrid.
+        /// </summary>
+        public static string ContentGridPageTitle {
+            get {
+                return ResourceManager.GetString("ContentGridPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DataGrid.
+        /// </summary>
+        public static string DataGridPageTitle {
+            get {
+                return ResourceManager.GetString("DataGridPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap FolderMinus_48 {
+            get {
+                object obj = ResourceManager.GetObject("FolderMinus_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap FolderMinus_Red_48 {
+            get {
+                object obj = ResourceManager.GetObject("FolderMinus_Red_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap FolderPlus_48 {
+            get {
+                object obj = ResourceManager.GetObject("FolderPlus_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap FolderPlus_Red_48 {
+            get {
+                object obj = ResourceManager.GetObject("FolderPlus_Red_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap FolderRedo_48 {
+            get {
+                object obj = ResourceManager.GetObject("FolderRedo_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sample Orders.
+        /// </summary>
+        public static string ListDetailsListDescription {
+            get {
+                return ResourceManager.GetString("ListDetailsListDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ListDetails.
+        /// </summary>
+        public static string ListDetailsPageTitle {
+            get {
+                return ResourceManager.GetString("ListDetailsPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Main.
+        /// </summary>
+        public static string MainPageTitle {
+            get {
+                return ResourceManager.GetString("MainPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Play_48 {
+            get {
+                object obj = ResourceManager.GetObject("Play_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Reset_48 {
+            get {
+                object obj = ResourceManager.GetObject("Reset_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings page placeholder text.  Your app description goes here..
+        /// </summary>
+        public static string SettingsPageAboutText {
+            get {
+                return ResourceManager.GetString("SettingsPageAboutText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About this application.
+        /// </summary>
+        public static string SettingsPageAboutTitle {
+            get {
+                return ResourceManager.GetString("SettingsPageAboutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose Theme.
+        /// </summary>
+        public static string SettingsPageChooseThemeText {
+            get {
+                return ResourceManager.GetString("SettingsPageChooseThemeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Personalization.
+        /// </summary>
+        public static string SettingsPagePersonalizationTitle {
+            get {
+                return ResourceManager.GetString("SettingsPagePersonalizationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacy Statement.
+        /// </summary>
+        public static string SettingsPagePrivacyStatementText {
+            get {
+                return ResourceManager.GetString("SettingsPagePrivacyStatementText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dark.
+        /// </summary>
+        public static string SettingsPageRadioButtonDarkTheme {
+            get {
+                return ResourceManager.GetString("SettingsPageRadioButtonDarkTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Light.
+        /// </summary>
+        public static string SettingsPageRadioButtonLightTheme {
+            get {
+                return ResourceManager.GetString("SettingsPageRadioButtonLightTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        public static string SettingsPageRadioButtonWindowsDefaultTheme {
+            get {
+                return ResourceManager.GetString("SettingsPageRadioButtonWindowsDefaultTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsPageTitle {
+            get {
+                return ResourceManager.GetString("SettingsPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go back.
         /// </summary>
         public static string ShellGoBackButton {
             get {
                 return ResourceManager.GetString("ShellGoBackButton", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to MenuFileHeader.
+        ///   Looks up a localized string similar to _File.
         /// </summary>
         public static string ShellMenuFileHeader {
             get {
                 return ResourceManager.GetString("ShellMenuFileHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to MenuViewsHeader.
-        /// </summary>
-        public static string ShellMenuViewsHeader {
-            get {
-                return ResourceManager.GetString("ShellMenuViewsHeader", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to MenuItemFileExitHeader.
+        ///   Looks up a localized string similar to _Exit.
         /// </summary>
         public static string ShellMenuItemFileExitHeader {
             get {
                 return ResourceManager.GetString("ShellMenuItemFileExitHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Main.
+        ///   Looks up a localized string similar to _Settings.
         /// </summary>
-        public static string MainPageTitle
-        {
-            get
-            {
-                return ResourceManager.GetString("MainPageTitle", resourceCulture);
+        public static string ShellMenuItemFileSettingsPageHeader {
+            get {
+                return ResourceManager.GetString("ShellMenuItemFileSettingsPageHeader", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to MenuItemViewsMainPageHeader.
-        /// </summary>
-        public static string ShellMenuItemViewsMainPageHeader
-        {
-            get
-            {
-                return ResourceManager.GetString("ShellMenuItemViewsMainPageHeader", resourceCulture);
-            }
-        }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Blank.
         /// </summary>
-        public static string BlankPageTitle
-        {
-            get
-            {
-                return ResourceManager.GetString("BlankPageTitle", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to MenuItemViewsBlankPageHeader.
-        /// </summary>
-        public static string ShellMenuItemViewsBlankPageHeader
-        {
-            get
-            {
+        public static string ShellMenuItemViewsBlankPageHeader {
+            get {
                 return ResourceManager.GetString("ShellMenuItemViewsBlankPageHeader", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Sample Orders.
-        /// </summary>
-        public static string ListDetailsListDescription
-        {
-            get
-            {
-                return ResourceManager.GetString("ListDetailsListDescription", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to ListDetails.
-        /// </summary>
-        public static string ListDetailsPageTitle
-        {
-            get
-            {
-                return ResourceManager.GetString("ListDetailsPageTitle", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to MenuItemViewsListDetailsPageHeader.
-        /// </summary>
-        public static string ShellMenuItemViewsListDetailsPageHeader
-        {
-            get
-            {
-                return ResourceManager.GetString("ShellMenuItemViewsListDetailsPageHeader", resourceCulture);
-            }
-        }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to ContentGrid.
         /// </summary>
-        public static string ContentGridPageTitle
-        {
-            get
-            {
-                return ResourceManager.GetString("ContentGridPageTitle", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to MenuItemViewsContentGridPageHeader.
-        /// </summary>
-        public static string ShellMenuItemViewsContentGridPageHeader
-        {
-            get
-            {
+        public static string ShellMenuItemViewsContentGridPageHeader {
+            get {
                 return ResourceManager.GetString("ShellMenuItemViewsContentGridPageHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to DataGrid.
         /// </summary>
-        public static string DataGridPageTitle
-        {
-            get
-            {
-                return ResourceManager.GetString("DataGridPageTitle", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to MenuItemViewsDataGridPageHeader.
-        /// </summary>
-        public static string ShellMenuItemViewsDataGridPageHeader
-        {
-            get
-            {
+        public static string ShellMenuItemViewsDataGridPageHeader {
+            get {
                 return ResourceManager.GetString("ShellMenuItemViewsDataGridPageHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to WebViewPageBackButtonTooltip
+        ///   Looks up a localized string similar to ListDetails.
         /// </summary>
-        public static string WebViewPageBackButtonTooltip
-        {
-            get
-            {
-                return ResourceManager.GetString("WebViewPageBackButtonTooltip", resourceCulture);
+        public static string ShellMenuItemViewsListDetailsPageHeader {
+            get {
+                return ResourceManager.GetString("ShellMenuItemViewsListDetailsPageHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to WebViewPageForwardButtonTooltip
+        ///   Looks up a localized string similar to Main.
         /// </summary>
-        public static string WebViewPageForwardButtonTooltip
-        {
-            get
-            {
-                return ResourceManager.GetString("WebViewPageForwardButtonTooltip", resourceCulture);
+        public static string ShellMenuItemViewsMainPageHeader {
+            get {
+                return ResourceManager.GetString("ShellMenuItemViewsMainPageHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to WebViewPageLoadingText
+        ///   Looks up a localized string similar to WebView.
         /// </summary>
-        public static string WebViewPageLoadingText
-        {
-            get
-            {
-                return ResourceManager.GetString("WebViewPageLoadingText", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to WebViewPageFaildedMessage
-        /// </summary>
-        public static string WebViewPageFaildedMessage
-        {
-            get
-            {
-                return ResourceManager.GetString("WebViewPageFaildedMessage", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to WebViewPageRefreshButtonTooltip
-        /// </summary>
-        public static string WebViewPageRefreshButtonTooltip
-        {
-            get
-            {
-                return ResourceManager.GetString("WebViewPageRefreshButtonTooltip", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to WebViewPageOpenInBrowserButtonTooltip
-        /// </summary>
-        public static string WebViewPageOpenInBrowserButtonTooltip
-        {
-            get
-            {
-                return ResourceManager.GetString("WebViewPageOpenInBrowserButtonTooltip", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to MenuItemViewsWebViewPageHeader.
-        /// </summary>
-        public static string ShellMenuItemViewsWebViewPageHeader
-        {
-            get
-            {
+        public static string ShellMenuItemViewsWebViewPageHeader {
+            get {
                 return ResourceManager.GetString("ShellMenuItemViewsWebViewPageHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Settings page placeholder text.  Your app description goes here..
+        ///   Looks up a localized string similar to _Views.
         /// </summary>
-        public static string SettingsPageAboutText
-        {
-            get
-            {
-                return ResourceManager.GetString("SettingsPageAboutText", resourceCulture);
+        public static string ShellMenuViewsHeader {
+            get {
+                return ResourceManager.GetString("ShellMenuViewsHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to About this application.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static string SettingsPageAboutTitle
-        {
-            get
-            {
-                return ResourceManager.GetString("SettingsPageAboutTitle", resourceCulture);
+        public static System.Drawing.Bitmap StopButton {
+            get {
+                object obj = ResourceManager.GetObject("StopButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Choose Theme.
+        ///   Looks up a localized string similar to Back (Alt + Left).
         /// </summary>
-        public static string SettingsPageChooseThemeText
-        {
-            get
-            {
-                return ResourceManager.GetString("SettingsPageChooseThemeText", resourceCulture);
+        public static string WebViewPageBackButtonTooltip {
+            get {
+                return ResourceManager.GetString("WebViewPageBackButtonTooltip", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Personalization.
+        ///   Looks up a localized string similar to Page failed to load. Check connection and retry..
         /// </summary>
-        public static string SettingsPagePersonalizationTitle
-        {
-            get
-            {
-                return ResourceManager.GetString("SettingsPagePersonalizationTitle", resourceCulture);
+        public static string WebViewPageFaildedMessage {
+            get {
+                return ResourceManager.GetString("WebViewPageFaildedMessage", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Privacy Statement.
+        ///   Looks up a localized string similar to Forward (Alt + Right).
         /// </summary>
-        public static string SettingsPagePrivacyStatementText
-        {
-            get
-            {
-                return ResourceManager.GetString("SettingsPagePrivacyStatementText", resourceCulture);
+        public static string WebViewPageForwardButtonTooltip {
+            get {
+                return ResourceManager.GetString("WebViewPageForwardButtonTooltip", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Dark.
+        ///   Looks up a localized string similar to Loading....
         /// </summary>
-        public static string SettingsPageRadioButtonDarkTheme
-        {
-            get
-            {
-                return ResourceManager.GetString("SettingsPageRadioButtonDarkTheme", resourceCulture);
+        public static string WebViewPageLoadingText {
+            get {
+                return ResourceManager.GetString("WebViewPageLoadingText", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Light.
+        ///   Looks up a localized string similar to Open in browser (Ctrl + T).
         /// </summary>
-        public static string SettingsPageRadioButtonLightTheme
-        {
-            get
-            {
-                return ResourceManager.GetString("SettingsPageRadioButtonLightTheme", resourceCulture);
+        public static string WebViewPageOpenInBrowserButtonTooltip {
+            get {
+                return ResourceManager.GetString("WebViewPageOpenInBrowserButtonTooltip", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Default.
+        ///   Looks up a localized string similar to Refresh (F5).
         /// </summary>
-        public static string SettingsPageRadioButtonWindowsDefaultTheme
-        {
-            get
-            {
-                return ResourceManager.GetString("SettingsPageRadioButtonWindowsDefaultTheme", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Settings.
-        /// </summary>
-        public static string SettingsPageTitle
-        {
-            get
-            {
-                return ResourceManager.GetString("SettingsPageTitle", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to MenuItemFileSettingsPageHeader.
-        /// </summary>
-        public static string ShellMenuItemFileSettingsPageHeader
-        {
-            get
-            {
-                return ResourceManager.GetString("ShellMenuItemFileSettingsPageHeader", resourceCulture);
+        public static string WebViewPageRefreshButtonTooltip {
+            get {
+                return ResourceManager.GetString("WebViewPageRefreshButtonTooltip", resourceCulture);
             }
         }
     }

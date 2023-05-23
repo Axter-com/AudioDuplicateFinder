@@ -2,6 +2,7 @@
 
 using AudioDuplicateFinder.Contracts.Views;
 using AudioDuplicateFinder.ViewModels;
+using AudioDuplicateFinder.Properties;
 
 using MahApps.Metro.Controls;
 
@@ -13,7 +14,9 @@ public partial class ShellWindow : MetroWindow, IShellWindow
     {
         InitializeComponent();
         DataContext = viewModel;
+        SaveWindowPosition = true;
     }
+
 
     public Frame GetNavigationFrame()
         => shellFrame;
@@ -24,8 +27,7 @@ public partial class ShellWindow : MetroWindow, IShellWindow
     public void ShowWindow()
         => Show();
 
-    public void CloseWindow()
-        => Close();
+    public void CloseWindow() => Close();
 
     public SplitView GetSplitView()
         => splitView;

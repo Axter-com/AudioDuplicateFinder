@@ -11,6 +11,7 @@ using AudioDuplicateFinder.Models;
 using AudioDuplicateFinder.Services;
 using AudioDuplicateFinder.ViewModels;
 using AudioDuplicateFinder.Views;
+using AudioDuplicateFinder.Properties;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +24,7 @@ namespace AudioDuplicateFinder;
 // WPF UI elements use language en-US by default.
 // If you need to support other cultures make sure you add converters and review dates and numbers in your UI to ensure everything adapts correctly.
 // Tracking issue for improving this is https://github.com/dotnet/wpf/issues/1946
-public partial class App : Application
+public partial class App : System.Windows.Application
 {
     private IHost _host;
 
@@ -33,6 +34,9 @@ public partial class App : Application
 
     public App()
     {
+        //this.MainWindow.Height = Settings.Default.WindowHeight;
+        //this.MainWindow.Width = Settings.Default.WindowWidth;
+
     }
 
     private async void OnStartup(object sender, StartupEventArgs e)
@@ -111,6 +115,7 @@ public partial class App : Application
 
     private async void OnExit(object sender, ExitEventArgs e)
     {
+        MainPage.mainPage.closeMethod();
         await _host.StopAsync();
         _host.Dispose();
         _host = null;

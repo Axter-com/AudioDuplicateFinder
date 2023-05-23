@@ -2,22 +2,70 @@
   
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <RootNamespace>AudioDuplicateFinder</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UseWindowsForms>True</UseWindowsForms>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <None Remove="Properties\Images\FolderPlus.48.png" />
+    <None Remove="Views\FolderClear.48.png" />
+    <None Remove="Views\FolderClear_Red.48.png" />
+    <None Remove="Views\FolderEdit.48.png" />
+    <None Remove="Views\FolderEdit_Red.48.png" />
+    <None Remove="Views\FolderMinus.48.png" />
+    <None Remove="Views\FolderMinus_Red.48.png" />
+    <None Remove="Views\FolderPlus.48.png" />
+    <None Remove="Views\FolderPlus_Red.48.png" />
+    <None Remove="Views\FolderRedo.48.png" />
+    <None Remove="Views\FolderRedo_Red.4 8.png" />
+    <None Remove="Views\FolderReset.48.png" />
+    <None Remove="Views\FolderReset_Red.48.png" />
+    <None Remove="Views\FolderUndo.48.png" />
+    <None Remove="Views\FolderUndo_Red.4.png" />
+    <None Remove="Views\Pause.48.png" />
+    <None Remove="Views\Play.48.png" />
+    <None Remove="Views\Stop.48.png" />
+    <None Remove="Views\StopSquare.48.png" />
+    <None Remove="Views\StopSquare_BlackSquare.48.png" />
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2" />
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1072.54" />
+    <PackageReference Include="System.Diagnostics.EventLog" Version="7.0.0" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\AudioDuplicateFinder.Core\AudioDuplicateFinder.Core.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Resource Include="Properties\Images\FolderPlus.48.png" />
+    <Resource Include="Views\FolderClear.48.png" />
+    <Resource Include="Views\FolderClear_Red.48.png" />
+    <Resource Include="Views\FolderEdit.48.png" />
+    <Resource Include="Views\FolderEdit_Red.48.png" />
+    <Resource Include="Views\FolderMinus.48.png" />
+    <Resource Include="Views\FolderMinus_Red.48.png" />
+    <Resource Include="Views\FolderPlus.48.png" />
+    <Resource Include="Views\FolderPlus_Red.48.png" />
+    <Resource Include="Views\FolderRedo.48.png" />
+    <Resource Include="Views\FolderRedo_Red.4 8.png" />
+    <Resource Include="Views\FolderReset.48.png" />
+    <Resource Include="Views\FolderReset_Red.48.png" />
+    <Resource Include="Views\FolderUndo.48.png" />
+    <Resource Include="Views\FolderUndo_Red.4.png" />
+    <Resource Include="Views\Pause.48.png" />
+    <Resource Include="Views\Play.48.png" />
+    <Resource Include="Views\Stop.48.png" />
+    <Resource Include="Views\StopSquare.48.png" />
+    <Resource Include="Views\StopSquare_BlackSquare.48.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -38,6 +91,10 @@
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 </Project>

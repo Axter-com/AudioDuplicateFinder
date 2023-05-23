@@ -1,31 +1,148 @@
 ﻿<Page
-    x:Class="AudioDuplicateFinder.Views.MainPage"
-    Style="{DynamicResource MahApps.Styles.Page}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:properties="clr-namespace:AudioDuplicateFinder.Properties"
-    mc:Ignorable="d"
-    d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    x:Class="AudioDuplicateFinder.Views.MainPage"
+    Style="{DynamicResource MahApps.Styles.Page}"
+    mc:Ignorable="d" d:DesignWidth="800" Height="527">
+    <Grid Margin="0,-44,0,44">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="64*"/>
+            <ColumnDefinition Width="719*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="48" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock
-            Style="{StaticResource PageTitleStyle}"
-            Margin="{StaticResource MediumLeftMargin}"
-            Text="{x:Static properties:Resources.MainPageTitle}" />
         <Grid
-            Grid.Row="1"
-            Margin="{StaticResource MediumLeftRightMargin}"
-            Background="{DynamicResource MahApps.Brushes.Gray10}">
-            <GroupBox Header="Directories" Margin="0,0,0,201">
-                <GroupBox Header="Include" Margin="0,0,382,0">
-                    <Button x:Name="AddIncludeDir" Content="Add" Height="37" Width="37" Click="AddIncludeDir_Click" HorizontalAlignment="Left" Margin="0,0,156,0" VerticalAlignment="Top"/>
-                </GroupBox>
+            Margin="7,47,25,-149"
+            Background="{DynamicResource MahApps.Brushes.Gray10}" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <ListView x:Name="lstVw_ExcludeDir" ToolTip="Directories to EXCLUDE in scan" Margin="0,135,16,301" HorizontalAlignment="Right" Width="308">
+                <ListView.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ListView.RenderTransform>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <EventSetter Event="Control.MouseDoubleClick" Handler="ExcludeDir_MouseDoubleClick"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <Button x:Name="AddExcludeDir" ToolTip="Add a folder to EXCLUDE directories list" Height="36" Width="45" Click="AddExcludeDir_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,92,276,0" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderPlus_Red.48.png"/>
+                </Button.Background>
+                <TextBlock Foreground="DarkRed"><Run Text="Add"/></TextBlock>
+            </Button>
+            <GroupBox Margin="0,56,8,290" HorizontalAlignment="Right" Width="329">
+                <GroupBox.Header>
+                    <TextBlock FontWeight="Bold" Text="Excluded Directories"/>
+                </GroupBox.Header>
             </GroupBox>
+            <GroupBox Margin="0,56,0,290" HorizontalAlignment="Left" Width="410">
+                <GroupBox.Header>
+                    <TextBlock FontWeight="Bold" Text="Included Directories"/>
+                </GroupBox.Header>
+            </GroupBox>
+            <Button x:Name="RemoveIncludeDir" ToolTip="Remove selected directory in INCLUDE directories list" HorizontalAlignment="Left" Margin="109,92,0,0" VerticalAlignment="Top" Height="36" Click="RemoveIncludeDir_Click" Width="45" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderMinus.48.png" Stretch="Fill"/>
+                </Button.Background>
+                <TextBlock Foreground="Orange"><Run Text="Remove"/></TextBlock>
+            </Button>
+            <Button x:Name="EditIncludeDir" ToolTip="Edit selected directory in INCLUDE directories list" HorizontalAlignment="Left" Margin="59,92,0,0" VerticalAlignment="Top" Height="36" Width="45" Click="EditIncludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderEdit.48.png" Stretch="Fill"/>
+                </Button.Background>
+                <TextBlock Foreground="Orange"><Run Text="Edit"/></TextBlock>
+            </Button>
+            <ListView x:Name="lstVw_IncludeDir" Margin="10,135,0,301" ToolTip="Directories to INCLUDE in scan" HorizontalAlignment="Left" Width="383">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <EventSetter Event="Control.MouseDoubleClick" Handler="IncludeDir_MouseDoubleClick"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <Button x:Name="ClearAll_IncludeDir" ToolTip="Clear all directories in INCLUDE directories list" HorizontalAlignment="Left" Margin="159,92,0,0" VerticalAlignment="Top" Height="36" Width="45" Click="ClearAll_IncludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderClear.48.png" Stretch="Fill"/>
+                </Button.Background>
+                <TextBlock Foreground="Orange"><Run Text="Clear"/></TextBlock>
+            </Button>
+            <Button x:Name="ClearAll_ExcludeDir" ToolTip="Clear all directories in EXCLUDE directories list" HorizontalAlignment="Right" Margin="0,92,126,0" VerticalAlignment="Top" Height="36" Width="45" Click="ClearAll_ExcludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderClear_Red.48.png"/>
+                </Button.Background>
+                <TextBlock Foreground="DarkRed"><Run Text="Clear"/></TextBlock>
+            </Button>
+            <Button x:Name="EditExcludeDir" ToolTip="Edit selected directory in EXCLUDE directories list" HorizontalAlignment="Right" Margin="0,92,226,0" VerticalAlignment="Top" Height="36" Width="45" Click="EditExcludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderEdit_Red.48.png"/>
+                </Button.Background>
+                <TextBlock Foreground="DarkRed"><Run Text="Edit"/></TextBlock>
+            </Button>
+            <Button x:Name="RemoveExcludeDir" ToolTip="Remove selected directory in EXCLUDE directories list" HorizontalAlignment="Right" Margin="0,92,176,0" VerticalAlignment="Top" Height="36"  Width="45" Click="RemoveExcludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderMinus_Red.48.png"/>
+                </Button.Background>
+                <TextBlock Foreground="DarkRed"><Run Text="Remove"/></TextBlock>
+            </Button>
+            <Button x:Name="AddIncludeDir" ToolTip="Add a folder to INCLUDE directories list" Height="36" Width="45" Click="AddIncludeDir_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,92,0,0" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderPlus.48.png"/>
+                </Button.Background>
+                <TextBlock Foreground="Orange"><Run Text="Add"/></TextBlock>
+            </Button>
+            <Button x:Name="StartScan" ToolTip="Start scanning for duplicate media files" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Top" Click="StartScan_Click" Height="51" Width="51" RenderTransformOrigin="0.5,1" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/Play.48.png"/>
+                </Button.Background>
+                <TextBlock x:Name="StartScan1" TextWrapping="Wrap"><Run Text="Start Scan"/></TextBlock>
+            </Button>
+            <Button x:Name="UndoIncludeDir" ToolTip="Undo last change in INCLUDE directories list" HorizontalAlignment="Left" Margin="209,92,0,0" VerticalAlignment="Top" Height="36" Width="45" Click="UndoIncludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderUndo.48.png"/>
+                </Button.Background>
+                <TextBlock Foreground="Orange"><Run Text="Undo"/></TextBlock>
+            </Button>
+            <Button x:Name="ResetIncludeDir" ToolTip="Reset INCLUDE directories list to value on program startup" HorizontalAlignment="Left" Margin="262,92,0,0" VerticalAlignment="Top" Height="36" Width="45" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial" Click="ResetIncludeDir_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderReset.48.png"/>
+                </Button.Background>
+                <TextBlock x:Name="ResetIncludeDir1" Foreground="Orange"><Run Text="Reset"/></TextBlock>
+            </Button>
+            <Button x:Name="ResetExcludeDir" ToolTip="Reset EXCLUDE directories list to value on program startup" HorizontalAlignment="Right" Margin="0,92,24,0" VerticalAlignment="Top" Height="36" Width="46" Click="ResetExcludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial" RenderTransformOrigin="3.435,-6.38">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderReset_Red.48.png"/>
+                </Button.Background>
+                <TextBlock Foreground="DarkRed"><Run Text="Reset"/></TextBlock>
+            </Button>
+            <Button x:Name="UndoExcludeDir" ToolTip="Undo last change in EXCLUDE directories list" HorizontalAlignment="Right" Margin="0,92,75,0" VerticalAlignment="Top" Height="36" Width="46" Click="UndoExcludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderUndo_Red.4.png"/>
+                </Button.Background>
+                <TextBlock Foreground="DarkRed"><Run Text="Undo"/></TextBlock>
+            </Button>
+            <Button x:Name="StopScan" ToolTip="Stop Scan" HorizontalAlignment="Left" Margin="120,0,0,0" VerticalAlignment="Top" Height="51" Width="51" Click="StopScan_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/StopSquare.48.png"/>
+                </Button.Background>
+                <TextBlock><Run Text="Stop"/></TextBlock>
+            </Button>
+            <Button x:Name="PauseScan" ToolTip="Pause Scan" HorizontalAlignment="Left" Margin="61,0,0,0" VerticalAlignment="Top" Height="51" Width="51" Click="PauseScan_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/Pause.48.png"/>
+                </Button.Background>
+                <TextBlock><Run Text="Pause"/></TextBlock>
+            </Button>
             <!--
             The Mahapps Gray10 color represents where you should place your content.
             Place your content here.

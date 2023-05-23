@@ -41,7 +41,7 @@ public class ThemeSelectorService : IThemeSelectorService
         {
             ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithHighContrast;
             ThemeManager.Current.SyncTheme();
-            ThemeManager.Current.ChangeTheme(Application.Current, $"{theme}.Blue", SystemParameters.HighContrast);
+            ThemeManager.Current.ChangeTheme(System.Windows.Application.Current, $"{theme}.Blue", SystemParameters.HighContrast);
         }
 
         App.Current.Properties["Theme"] = theme.ToString();

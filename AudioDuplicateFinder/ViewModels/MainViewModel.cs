@@ -7,5 +7,6 @@ public class MainViewModel : ObservableObject
 {
     public MainViewModel()
     {
+        
     }
 }
