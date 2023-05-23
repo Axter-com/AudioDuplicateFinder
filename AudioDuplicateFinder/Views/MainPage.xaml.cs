@@ -60,11 +60,11 @@ public partial class MainPage : Page
             return true;
         }
 
-        foreach ( object flder in listBox.Items )
+        foreach ( object f in listBox.Items )
         {
-            if ( flder.ToString().Equals(PreviousValue, StringComparison.InvariantCultureIgnoreCase) )
+            if ( ReplaceItem && f.ToString().Equals(PreviousValue, StringComparison.InvariantCultureIgnoreCase) )
                 continue;
-            string folder = flder + "\\";
+            string folder = f + "\\";
             // Check if existing directory is root of selected path
             if ( SelectedPath.StartsWith(folder.ToString(), StringComparison.InvariantCultureIgnoreCase) )
             {
