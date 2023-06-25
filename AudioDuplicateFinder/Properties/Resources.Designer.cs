@@ -70,15 +70,6 @@ namespace AudioDuplicateFinder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Blank.
-        /// </summary>
-        public static string BlankPageTitle {
-            get {
-                return ResourceManager.GetString("BlankPageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ContentGrid.
         /// </summary>
         public static string ContentGridPageTitle {
@@ -88,11 +79,20 @@ namespace AudioDuplicateFinder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DataGrid.
+        ///   Looks up a localized string similar to Duplicate Groups.
         /// </summary>
-        public static string DataGridPageTitle {
+        public static string DuplicateGroupsPageTitle {
             get {
-                return ResourceManager.GetString("DataGridPageTitle", resourceCulture);
+                return ResourceManager.GetString("DuplicateGroupsPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duplicate List.
+        /// </summary>
+        public static string DuplicateListPageTitle {
+            get {
+                return ResourceManager.GetString("DuplicateListPageTitle", resourceCulture);
             }
         }
         
@@ -311,15 +311,6 @@ namespace AudioDuplicateFinder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Blank.
-        /// </summary>
-        public static string ShellMenuItemViewsBlankPageHeader {
-            get {
-                return ResourceManager.GetString("ShellMenuItemViewsBlankPageHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ContentGrid.
         /// </summary>
         public static string ShellMenuItemViewsContentGridPageHeader {
@@ -329,11 +320,20 @@ namespace AudioDuplicateFinder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DataGrid.
+        ///   Looks up a localized string similar to Duplicate Groups.
         /// </summary>
-        public static string ShellMenuItemViewsDataGridPageHeader {
+        public static string ShellMenuItemViewsDuplicateGroupsPageHeader {
             get {
-                return ResourceManager.GetString("ShellMenuItemViewsDataGridPageHeader", resourceCulture);
+                return ResourceManager.GetString("ShellMenuItemViewsDuplicateGroupsPageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duplicate List.
+        /// </summary>
+        public static string ShellMenuItemViewsDuplicateListPageHeader {
+            get {
+                return ResourceManager.GetString("ShellMenuItemViewsDuplicateListPageHeader", resourceCulture);
             }
         }
         

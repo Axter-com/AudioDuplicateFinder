@@ -45,7 +45,7 @@
             Grid.Row="1"
             Margin="{StaticResource SmallLeftMargin}"
             SelectionMode="Single"
-            ItemsSource="{Binding Source}"
+            ItemsSource="{Binding MediaFileItems}"
             Style="{StaticResource ContentGridListViewStyle}"
             ItemTemplate="{StaticResource contentGridItemTemplate}">
             <i:Interaction.Behaviors>

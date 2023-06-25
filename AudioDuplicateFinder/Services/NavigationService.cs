@@ -74,8 +74,7 @@ public class NavigationService : INavigationService
         return false;
     }
 
-    public void CleanNavigation()
-        => _frame.CleanNavigation();
+    public void CleanNavigation() => _frame.CleanNavigation();
 
     private void OnNavigated(object sender, NavigationEventArgs e)
     {

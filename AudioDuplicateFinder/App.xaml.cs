@@ -31,6 +31,7 @@ public partial class App : System.Windows.Application
     public T GetService<T>()
         where T : class
         => _host.Services.GetService(typeof(T)) as T;
+    public IHost GetHost() => _host;
 
     public App()
     {
@@ -73,7 +74,8 @@ public partial class App : System.Windows.Application
         services.AddSingleton<IPersistAndRestoreService, PersistAndRestoreService>();
         services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
         services.AddSingleton<ISystemService, SystemService>();
-        services.AddSingleton<ISampleDataService, SampleDataService>();
+        // services.AddSingleton<ISampleDataService, SampleDataService>();
+        services.AddSingleton<IMediaFileDataService, MediaFileDataService>();
         services.AddSingleton<IPageService, PageService>();
         services.AddSingleton<INavigationService, NavigationService>();
 
@@ -84,8 +86,8 @@ public partial class App : System.Windows.Application
         services.AddTransient<MainViewModel>();
         services.AddTransient<MainPage>();
 
-        services.AddTransient<BlankViewModel>();
-        services.AddTransient<BlankPage>();
+        services.AddTransient<DuplicateGroupsViewModel > ();
+        services.AddTransient<DuplicateGroupsPage>();
 
         services.AddTransient<ListDetailsViewModel>();
         services.AddTransient<ListDetailsPage>();
@@ -96,8 +98,8 @@ public partial class App : System.Windows.Application
         services.AddTransient<ContentGridDetailViewModel>();
         services.AddTransient<ContentGridDetailPage>();
 
-        services.AddTransient<DataGridViewModel>();
-        services.AddTransient<DataGridPage>();
+        services.AddTransient<DuplicateListViewModel>();
+        services.AddTransient<DuplicateListPage>();
 
         services.AddTransient<WebViewViewModel>();
         services.AddTransient<WebViewPage>();

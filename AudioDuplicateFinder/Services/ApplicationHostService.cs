@@ -15,7 +15,7 @@ public class ApplicationHostService : IHostedService
     private readonly IThemeSelectorService _themeSelectorService;
     private readonly IRightPaneService _rightPaneService;
     private readonly IEnumerable<IActivationHandler> _activationHandlers;
-    private IShellWindow _shellWindow;
+    public IShellWindow _shellWindow { get; private set; } = null;
     private bool _isInitialized;
 
     public ApplicationHostService(IServiceProvider serviceProvider, IEnumerable<IActivationHandler> activationHandlers, INavigationService navigationService, IRightPaneService rightPaneService, IThemeSelectorService themeSelectorService, IPersistAndRestoreService persistAndRestoreService)

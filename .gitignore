@@ -263,6 +263,7 @@ __pycache__/
 # Exclude test data and temp files
 *__ExcludeFromRepo__*.*
 *__DoNotAddToRepo__*.*
+deleteme/
 RelatedProjects/
 obj/
 

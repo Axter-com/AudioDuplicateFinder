@@ -66,10 +66,10 @@
                         <MenuItem Header="{x:Static properties:Resources.ShellMenuViewsHeader}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}">
                             <!--TODO: Review the MenuItem headers in Resources.resx file for all of your views and place '_' before the letter that you want to use for menu keyboard usage-->
                             <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsMainPageHeader}" Command="{Binding MenuViewsMainCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
-                            <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsBlankPageHeader}" Command="{Binding MenuViewsBlankCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
+                            <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsDuplicateGroupsPageHeader}" Command="{Binding MenuViewsDuplicateGroupsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
                             <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsListDetailsPageHeader}" Command="{Binding MenuViewsListDetailsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
                             <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsContentGridPageHeader}" Command="{Binding MenuViewsContentGridCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
-                            <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsDataGridPageHeader}" Command="{Binding MenuViewsDataGridCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
+                            <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsDuplicateListPageHeader}" Command="{Binding MenuViewsDuplicateListCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
                             <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsWebViewPageHeader}" Command="{Binding MenuViewsWebViewCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
                         </MenuItem>
                     </Menu>

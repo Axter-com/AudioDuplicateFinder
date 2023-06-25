@@ -15,16 +15,17 @@ namespace AudioDuplicateFinder.ViewModels;
 // https://github.com/microsoft/TemplateStudio/blob/main/docs/WPF/projectTypes/menubar.md
 public class ShellViewModel : ObservableObject
 {
+    public static ShellViewModel shellViewModel { get; private set ; } = null;
     private readonly INavigationService _navigationService;
     private readonly IRightPaneService _rightPaneService;
 
     private RelayCommand _goBackCommand;
     private ICommand _menuFileSettingsCommand;
     private ICommand _menuViewsWebViewCommand;
-    private ICommand _menuViewsDataGridCommand;
+    private ICommand _menuViewsDuplicateListCommand;
     private ICommand _menuViewsContentGridCommand;
     private ICommand _menuViewsListDetailsCommand;
-    private ICommand _menuViewsBlankCommand;
+    private ICommand _menuViewsDuplicateGroupsCommand;
     private ICommand _menuViewsMainCommand;
     private ICommand _menuFileExitCommand;
     private ICommand _loadedCommand;
@@ -44,6 +45,7 @@ public class ShellViewModel : ObservableObject
     {
         _navigationService = navigationService;
         _rightPaneService = rightPaneService;
+        shellViewModel = this;
     }
 
     private void OnLoaded()
@@ -73,34 +75,34 @@ public class ShellViewModel : ObservableObject
 
     public ICommand MenuViewsMainCommand => _menuViewsMainCommand ?? (_menuViewsMainCommand = new RelayCommand(OnMenuViewsMain));
 
-    private void OnMenuViewsMain()
+    public void OnMenuViewsMain()
         => _navigationService.NavigateTo(typeof(MainViewModel).FullName, null, true);
 
-    public ICommand MenuViewsBlankCommand => _menuViewsBlankCommand ?? (_menuViewsBlankCommand = new RelayCommand(OnMenuViewsBlank));
+    public ICommand MenuViewsDuplicateGroupsCommand => _menuViewsDuplicateGroupsCommand ?? (_menuViewsDuplicateGroupsCommand = new RelayCommand(OnMenuViewsDuplicateGroups));
 
-    private void OnMenuViewsBlank()
-        => _navigationService.NavigateTo(typeof(BlankViewModel).FullName, null, true);
+    public void OnMenuViewsDuplicateGroups()
+        => _navigationService.NavigateTo(typeof(DuplicateGroupsViewModel).FullName, null, true);
 
     public ICommand MenuViewsListDetailsCommand => _menuViewsListDetailsCommand ?? (_menuViewsListDetailsCommand = new RelayCommand(OnMenuViewsListDetails));
 
-    private void OnMenuViewsListDetails()
+    public void OnMenuViewsListDetails()
         => _navigationService.NavigateTo(typeof(ListDetailsViewModel).FullName, null, true);
 
     public ICommand MenuViewsContentGridCommand => _menuViewsContentGridCommand ?? (_menuViewsContentGridCommand = new RelayCommand(OnMenuViewsContentGrid));
 
-    private void OnMenuViewsContentGrid()
+    public void OnMenuViewsContentGrid()
         => _navigationService.NavigateTo(typeof(ContentGridViewModel).FullName, null, true);
 
-    public ICommand MenuViewsDataGridCommand => _menuViewsDataGridCommand ?? (_menuViewsDataGridCommand = new RelayCommand(OnMenuViewsDataGrid));
+    public ICommand MenuViewsDuplicateListCommand => _menuViewsDuplicateListCommand ?? (_menuViewsDuplicateListCommand = new RelayCommand(OnMenuViewsDuplicateList));
 
-    private void OnMenuViewsDataGrid()
-        => _navigationService.NavigateTo(typeof(DataGridViewModel).FullName, null, true);
+    public void OnMenuViewsDuplicateList()
+        => _navigationService.NavigateTo(typeof(DuplicateListViewModel).FullName, null, true);
 
     public ICommand MenuViewsWebViewCommand => _menuViewsWebViewCommand ?? (_menuViewsWebViewCommand = new RelayCommand(OnMenuViewsWebView));
 
-    private void OnMenuViewsWebView()
+    public void OnMenuViewsWebView()
         => _navigationService.NavigateTo(typeof(WebViewViewModel).FullName, null, true);
 
-    private void OnMenuFileSettings()
+    public void OnMenuFileSettings()
         => _rightPaneService.OpenInRightPane(typeof(SettingsViewModel).FullName);
 }

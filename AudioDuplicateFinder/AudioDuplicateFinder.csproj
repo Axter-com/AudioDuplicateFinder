@@ -36,8 +36,10 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2" />
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1072.54" />
+    <PackageReference Include="protobuf-net" Version="3.2.26" />
     <PackageReference Include="System.Diagnostics.EventLog" Version="7.0.0" />
   </ItemGroup>
   
@@ -92,9 +94,18 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Database\mfdf.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>Scaffold-DbContext "Data Source=.\Database\mfdf.db" Microsoft.EntityFrameworkCore.Sqlite -OutputDir Models</Generator>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Database\" />
+    <Folder Include="AudioUtils\" />
   </ItemGroup>
 </Project>

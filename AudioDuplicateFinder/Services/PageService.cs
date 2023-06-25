@@ -17,11 +17,11 @@ public class PageService : IPageService
     {
         _serviceProvider = serviceProvider;
         Configure<MainViewModel, MainPage>();
-        Configure<BlankViewModel, BlankPage>();
+        Configure<DuplicateGroupsViewModel, DuplicateGroupsPage>();
         Configure<ListDetailsViewModel, ListDetailsPage>();
         Configure<ContentGridViewModel, ContentGridPage>();
         Configure<ContentGridDetailViewModel, ContentGridDetailPage>();
-        Configure<DataGridViewModel, DataGridPage>();
+        Configure<DuplicateListViewModel, DuplicateListPage>();
         Configure<WebViewViewModel, WebViewPage>();
         Configure<SettingsViewModel, SettingsPage>();
     }

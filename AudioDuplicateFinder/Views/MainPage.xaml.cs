@@ -1,14 +1,32 @@
-﻿using System.Windows.Controls;
+﻿/*
+//      Copyright © 2023 David Maisonave
+//      GPLv3 License
+*/
+
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Collections.Specialized;
 using CtrlListbox = System.Windows.Controls.ListBox;
+using System.Data.SQLite;
+using SQLiteExtensions;
 
 using AudioDuplicateFinder.ViewModels;
 using AudioDuplicateFinder.Properties;
+using AudioDuplicateFinder.FileUtils;
+using AudioDuplicateFinder.SQL;
 
 using Microsoft.Win32;
 using System.Linq;
+using System.IO;
+using System.Diagnostics;
+using AudioDuplicateFinder.Services;
+using AudioDuplicateFinder.Core.Models;
+using System.Collections.Generic;
+using AudioDuplicateFinder.Core.Services;
+using System;
+using System.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AudioDuplicateFinder.Views;
 
@@ -17,6 +35,7 @@ public partial class MainPage : Page
     public static MainPage mainPage = null;
     private StringCollection IncludeDirLastState = null;
     private StringCollection ExcludeDirLastState = null;
+    private FileSearch filesearch;
     public MainPage(MainViewModel viewModel)
     {
         InitializeComponent();
@@ -183,15 +202,73 @@ public partial class MainPage : Page
 
     private void PauseScan_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-
+        if ( filesearch != null )
+            filesearch.PauseSearch();
     }
 
     private void StopScan_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-
+        if ( filesearch != null )
+            filesearch.StopSearch();
     }
     private void StartScan_Click(object sender, System.Windows.RoutedEventArgs e)
     {
+        if ( filesearch != null )
+            filesearch.StopSearch();
+        SaveLastState(lstVw_IncludeDir, ref IncludeDirLastState);
+        SaveLastState(lstVw_ExcludeDir, ref ExcludeDirLastState);
+#if DEBUG
+        int MaxParallel = -1; // Easier for debugging purposes
+#else
+        int MaxParallel = -1;
+#endif
+        filesearch = new(IncludeDirLastState, ExcludeDirLastState, MaxParallel);
+        // filesearch.fileTypes = FileSearch.FileTypes.AudioFiles;
+        filesearch.StartSearch();
+        List<FileProperty> fileInfos = filesearch.GetFileList();
+        HashSet<DuplicateFile> DuplicateFiles = filesearch.GetDuplicateList();
 
+        // This SQLite method is faster and can easily use "insert or replace"
+        //        string createTableCmd = "CREATE TABLE \"FileProperties\" (\r\n\t\"ParentDir\"\tTEXT NOT NULL,\r\n\t\"Name\"\tTEXT NOT NULL,\r\n\t\"Ext\"\tTEXT NOT NULL,\r\n\t\"MediaType\"\tINTEGER NOT NULL DEFAULT 0,\r\n\t\"Size\"\tINTEGER NOT NULL DEFAULT 0,\r\n\t\"Duration\"\tINTEGER NOT NULL DEFAULT 0,\r\n\t\"CheckSum\"\tINTEGER NOT NULL DEFAULT 0,\r\n\t\"FingerPrint\"\tBLOB,\r\n\tPRIMARY KEY(\"Name\",\"ParentDir\")\r\n);";
+        //        using ( SQLiteConnection? conn = SqliteExt.CreateConnection(".\\Database\\mfdf.db", createTableCmd) )
+        //        {
+        //            SQLiteCommand sql_cmd = conn.CreateCommand();
+        //#if DEBUG
+        //            sql_cmd.DeleteFrom("FileProperties");
+        //#endif
+
+        //            foreach ( FileInfo file in fileInfos )
+        //                sql_cmd.Execute($"INSERT OR REPLACE into FileProperties (ParentDir, Name, Ext, Size) values (\"{file.Name}\", \"{file.DirectoryName}\", \"{file.Extension}\", {file.Length})");
+        //            //sql_cmd.qu
+        //        }
+
+        // Too slow. About 30% slower
+        //FilePropertiesContext filePropertiesContext = new ();
+        //using ( FilePropertiesContext db = new() )
+        //    foreach ( FileInfo file in fileInfos )
+        //    {
+        //        db.Add(new FileProperty()
+        //        {
+        //            Name = file.Name,
+        //            ParentDir = file.DirectoryName,
+        //            Ext = file.Extension,
+        //            Size = file.Length
+        //        });
+        //    }
+        List < MediaFileInfo > mediaFiles = new ();
+        foreach ( DuplicateFile file in DuplicateFiles )
+            mediaFiles.Add(new MediaFileInfo()
+            {
+                GUID = file.GroupId,
+                Size = file.fileInfo.Length,
+                Name = file.fileInfo.Name,
+                Ext = file.fileInfo.Extension,
+                DirectoryName = file.fileInfo.DirectoryName,
+                Duration = file.Duration.TotalSeconds,
+                IsReadOnly = file.fileInfo.IsReadOnly
+            });
+        MediaFileDataService.SetMediaFileInfo(mediaFiles);
+        Debug.WriteLine($"*****************Completed scan with {fileInfos.Count} items found.");
+        ShellViewModel.shellViewModel.OnMenuViewsDuplicateGroups();
     }
 }

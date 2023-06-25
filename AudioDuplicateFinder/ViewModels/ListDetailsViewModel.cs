@@ -11,34 +11,31 @@ namespace AudioDuplicateFinder.ViewModels;
 
 public class ListDetailsViewModel : ObservableObject, INavigationAware
 {
-    private readonly ISampleDataService _sampleDataService;
-    private SampleOrder _selected;
+    private readonly IMediaFileDataService _mediaFileDataService;
+    private MediaFileInfo _selected;
 
-    public SampleOrder Selected
+    public MediaFileInfo Selected
     {
         get { return _selected; }
         set { SetProperty(ref _selected, value); }
     }
 
-    public ObservableCollection<SampleOrder> SampleItems { get; private set; } = new ObservableCollection<SampleOrder>();
+    public ObservableCollection<MediaFileInfo> MediaFileItems { get; private set; } = new ObservableCollection<MediaFileInfo>();
 
-    public ListDetailsViewModel(ISampleDataService sampleDataService)
-    {
-        _sampleDataService = sampleDataService;
-    }
+    public ListDetailsViewModel(IMediaFileDataService mediaFileDataService) => _mediaFileDataService = mediaFileDataService;
 
     public async void OnNavigatedTo(object parameter)
     {
-        SampleItems.Clear();
+        MediaFileItems.Clear();
 
-        var data = await _sampleDataService.GetListDetailsDataAsync();
+        var data = await _mediaFileDataService.GetListDetailsDataAsync();
 
         foreach (var item in data)
         {
-            SampleItems.Add(item);
+            MediaFileItems.Add(item);
         }
 
-        Selected = SampleItems.First();
+        Selected = MediaFileItems.First();
     }
 
     public void OnNavigatedFrom()

@@ -168,11 +168,11 @@
   <data name="WebViewPageOpenInBrowserButtonTooltip" xml:space="preserve">
     <value>Open in browser (Ctrl + T)</value>
   </data>
-  <data name="ShellMenuItemViewsDataGridPageHeader" xml:space="preserve">
-    <value>DataGrid</value>
+  <data name="ShellMenuItemViewsDuplicateListPageHeader" xml:space="preserve">
+    <value>Duplicate List</value>
   </data>
-  <data name="DataGridPageTitle" xml:space="preserve">
-    <value>DataGrid</value>
+  <data name="DuplicateListPageTitle" xml:space="preserve">
+    <value>Duplicate List</value>
   </data>
   <data name="ShellMenuItemViewsContentGridPageHeader" xml:space="preserve">
     <value>ContentGrid</value>
@@ -189,11 +189,11 @@
   <data name="ListDetailsListDescription" xml:space="preserve">
     <value>Sample Orders</value>
   </data>
-  <data name="ShellMenuItemViewsBlankPageHeader" xml:space="preserve">
-    <value>Blank</value>
+  <data name="ShellMenuItemViewsDuplicateGroupsPageHeader" xml:space="preserve">
+    <value>Duplicate Groups</value>
   </data>
-  <data name="BlankPageTitle" xml:space="preserve">
-    <value>Blank</value>
+  <data name="DuplicateGroupsPageTitle" xml:space="preserve">
+    <value>Duplicate Groups</value>
   </data>
   <data name="ShellMenuItemViewsMainPageHeader" xml:space="preserve">
     <value>Main</value>

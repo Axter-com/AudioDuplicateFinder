@@ -14,28 +14,28 @@ namespace AudioDuplicateFinder.ViewModels;
 public class ContentGridViewModel : ObservableObject, INavigationAware
 {
     private readonly INavigationService _navigationService;
-    private readonly ISampleDataService _sampleDataService;
+    private readonly IMediaFileDataService _mediaFileDataService;
     private ICommand _navigateToDetailCommand;
 
-    public ICommand NavigateToDetailCommand => _navigateToDetailCommand ?? (_navigateToDetailCommand = new RelayCommand<SampleOrder>(NavigateToDetail));
+    public ICommand NavigateToDetailCommand => _navigateToDetailCommand ?? (_navigateToDetailCommand = new RelayCommand<MediaFileInfo>(NavigateToDetail));
 
-    public ObservableCollection<SampleOrder> Source { get; } = new ObservableCollection<SampleOrder>();
+    public ObservableCollection<MediaFileInfo> MediaFileItems { get; } = new ObservableCollection<MediaFileInfo>();
 
-    public ContentGridViewModel(ISampleDataService sampleDataService, INavigationService navigationService)
+    public ContentGridViewModel(IMediaFileDataService mediaFileDataService, INavigationService navigationService)
     {
-        _sampleDataService = sampleDataService;
+        _mediaFileDataService = mediaFileDataService;
         _navigationService = navigationService;
     }
 
     public async void OnNavigatedTo(object parameter)
     {
-        Source.Clear();
+        MediaFileItems.Clear();
 
         // Replace this with your actual data
-        var data = await _sampleDataService.GetContentGridDataAsync();
+        var data = await _mediaFileDataService.GetContentGridDataAsync();
         foreach (var item in data)
         {
-            Source.Add(item);
+            MediaFileItems.Add(item);
         }
     }
 
@@ -43,8 +43,8 @@ public class ContentGridViewModel : ObservableObject, INavigationAware
     {
     }
 
-    private void NavigateToDetail(SampleOrder order)
+    private void NavigateToDetail(MediaFileInfo order)
     {
-        _navigationService.NavigateTo(typeof(ContentGridDetailViewModel).FullName, order.OrderID);
+        _navigationService.NavigateTo(typeof(ContentGridDetailViewModel).FullName, order.Name);
     }
 }

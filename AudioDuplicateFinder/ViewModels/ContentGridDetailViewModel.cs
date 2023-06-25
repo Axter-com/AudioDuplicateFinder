@@ -9,26 +9,27 @@ namespace AudioDuplicateFinder.ViewModels;
 
 public class ContentGridDetailViewModel : ObservableObject, INavigationAware
 {
-    private readonly ISampleDataService _sampleDataService;
-    private SampleOrder _item;
-
-    public SampleOrder Item
+    private readonly IMediaFileDataService _mediaFileDataService;
+    private MediaFileInfo _item;
+    public MediaFileInfo Item
     {
-        get { return _item; }
-        set { SetProperty(ref _item, value); }
+        get => _item;
+        set => SetProperty(ref _item, value);
     }
 
-    public ContentGridDetailViewModel(ISampleDataService sampleDataService)
-    {
-        _sampleDataService = sampleDataService;
-    }
+    public ContentGridDetailViewModel(IMediaFileDataService mediaFileDataService) =>_mediaFileDataService = mediaFileDataService;
 
     public async void OnNavigatedTo(object parameter)
     {
-        if (parameter is long orderID)
+        if ( parameter is string Name )
         {
-            var data = await _sampleDataService.GetContentGridDataAsync();
-            Item = data.First(i => i.OrderID == orderID);
+            var data = await _mediaFileDataService.GetContentGridDataAsync();
+            Item = data.First(i => i.Name == Name);
+        }
+        else if ( parameter is long Size )
+        {
+            var data = await _mediaFileDataService.GetContentGridDataAsync();
+            Item = data.First(i => i.Size == Size);
         }
     }
 
