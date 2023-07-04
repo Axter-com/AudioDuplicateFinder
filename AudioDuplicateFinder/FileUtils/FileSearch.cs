@@ -16,11 +16,14 @@ using AudioDuplicateFinder.FileUtils;
 using AudioDuplicateFinder.AudioUtils;
 using System.Windows;
 using AudioDuplicateFinder.Properties;
+using System.ComponentModel;
+using AudioDuplicateFinder.Views;
 
 namespace AudioDuplicateFinder.FileUtils
 {
     public class FileSearch
     {
+        private BackgroundWorker BgWorker;
         // Public modifiable
         public FileTypes fileTypes { get; set; } = FileTypes.MediaFiles;
         public bool ignoreReadonly { get; set; } = true;
@@ -31,8 +34,9 @@ namespace AudioDuplicateFinder.FileUtils
         public List<FileProperty> fileInfoList { get; private set; } = new List<FileProperty>();
         public string[] AllowedExtensions { get; private set; } = null;
 
-        public FileSearch(StringCollection i, StringCollection x, int MaxParallel = -1) // ToDo: Set MaxParallel to a program settings value
+        public FileSearch(StringCollection i, StringCollection x, BackgroundWorker bgWorker, int MaxParallel = -1) // ToDo: Set MaxParallel to a program settings value
         {
+            BgWorker = bgWorker;
             if ( MaxParallel == 0 )
                 maxParallel = 1; 
             else if ( MaxParallel < 0 || MaxParallel > MAX_PARALLEL )
@@ -62,6 +66,7 @@ namespace AudioDuplicateFinder.FileUtils
         }
         public void StartSearch()
         {
+            BgWorker.ReportProgress(10);
             List<string> list = new();
             if ( fileTypes == FileTypes.MediaFiles )
                 list.AddRange(FileExtensions.MediaExtensions);
@@ -89,6 +94,7 @@ namespace AudioDuplicateFinder.FileUtils
                     list.AddRange(FileExtensions.PresentationExtensions);
             }
 
+            BgWorker.ReportProgress(20);
             AllowedExtensions = list.ToArray();
             lock ( lockUntilComplete )
             {
@@ -120,13 +126,14 @@ namespace AudioDuplicateFinder.FileUtils
         private void DoFileSearch(string[] includeDir, ParallelOptions options, int Tier)
         {
             ParallelOptions optionCpy = new (){ MaxDegreeOfParallelism = maxParallel,  CancellationToken = cts.Token };
+            BgWorker.ReportProgress(0, new MyUserState { Maximum = 100, JobStatus = "DoFileSearch", LeftStatusText = $"FileSearch[{Tier}]", CenterStatusText = "Getting file list..." });
             Parallel.ForEach(includeDir, optionCpy, item =>
             {
                 if ( item != null )
                 {
                     Debug.WriteLine($"Sequential iteration on item '{item}' running on thread {Thread.CurrentThread.ManagedThreadId} Tier={Tier}.");
                     PauseIfOnHold();
-
+                    BgWorker.ReportProgress(-1);
                     if ( !options.CancellationToken.IsCancellationRequested )
                     {
                         List<FileInfo> files = new (); // An instance for each thread which will get appended to fileInfoList before thread ends.
@@ -174,10 +181,14 @@ namespace AudioDuplicateFinder.FileUtils
         {
             Dictionary<string, DuplicateFile> duplicateDict = new();
             ParallelOptions optionCpy = new (){ MaxDegreeOfParallelism = maxParallel,  CancellationToken = cts.Token };
+            MyUserState myUserState = new MyUserState(){ Maximum = fileInfoList.Count * fileInfoList.Count, JobStatus = "DoDuplicateCompare", LeftStatusText = $"Comparing {fileInfoList.Count} files", CenterStatusText = $"Comparing {fileInfoList.Count} files." };
+            BgWorker.ReportProgress(0, myUserState);
             Parallel.For(0, fileInfoList.Count, optionCpy, i =>
             {
                 PauseIfOnHold();
                 FileProperty entry = fileInfoList[i];
+                myUserState.CenterStatusText = $"Processing {entry.Name}";
+                BgWorker.ReportProgress(-1, myUserState);
                 if ( entry.IsAudio && entry.waveControl != null ) // ToDo: Add code to temporarily convert audio to WAV type
                 {
                     float accuracy = 0;
@@ -185,6 +196,8 @@ namespace AudioDuplicateFinder.FileUtils
                     {
                         PauseIfOnHold();
                         FileProperty compItem = fileInfoList[n];
+                        myUserState.CenterStatusText = $"Comparing '{entry.Name}' ({i}) to '{compItem.Name}' ({n})";
+                        BgWorker.ReportProgress(-1, myUserState);
                         if ( !compItem.IsAudio || compItem.waveControl == null ) // ToDo: Add code to temporarily convert audio to WAV type
                             continue;
                         accuracy = entry.waveControl.Sound.Compare(compItem.waveControl.Sound);

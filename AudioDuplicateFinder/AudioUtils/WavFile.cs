@@ -1,5 +1,8 @@
 using System;
 using System.IO;
+using System.Reflection;
+
+using Microsoft.Extensions.FileProviders;
 
 namespace AudioDuplicateFinder.AudioUtils
 {
@@ -11,13 +14,17 @@ namespace AudioDuplicateFinder.AudioUtils
         private WaveSound _Sound;
         public WaveSound Sound
         {// This is the WaveFile class variable that describes the internal structures of the .WAV
-            get => _Sound ??= new(fileName);
+            get => _Sound ??= new(fileInfo, isValidWavFile);
             private set=> _Sound = value;
         }
         public string fileName { get;}
-        public WavFile(string filename)
+        public FileInfo fileInfo { get; }
+        private bool isValidWavFile = true;
+        public WavFile(FileInfo fi, bool IsValidWavFile = true)
         {
-            fileName = filename;
+            fileInfo = fi;
+            isValidWavFile =IsValidWavFile;
+            fileName = fi.FullName;
             try
             {
                 Sound.ReadWavFile();
@@ -25,8 +32,8 @@ namespace AudioDuplicateFinder.AudioUtils
             catch ( Exception ex )
             {
                 // ToDo: Change this to console output
-                MessageBox.Show($"Error while reading the sound file {filename}:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error while reading the sound file {fileName}:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-   }
+    }
 }

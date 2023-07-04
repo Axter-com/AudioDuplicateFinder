@@ -27,15 +27,26 @@ using AudioDuplicateFinder.Core.Services;
 using System;
 using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel;
+using System.Windows;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace AudioDuplicateFinder.Views;
 
+public class MyUserState
+{
+    public double Maximum { get; set; }
+    public string JobStatus { get; set; }
+    public string LeftStatusText { get; set; }
+    public string CenterStatusText { get; set; }
+}
 public partial class MainPage : Page
 {
     public static MainPage mainPage = null;
     private StringCollection IncludeDirLastState = null;
     private StringCollection ExcludeDirLastState = null;
     private FileSearch filesearch;
+    private BackgroundWorker lastSender = null;
     public MainPage(MainViewModel viewModel)
     {
         InitializeComponent();
@@ -47,6 +58,10 @@ public partial class MainPage : Page
         if ( Settings.Default.ExcludeDir != null )
             foreach ( object excludedir in Settings.Default.ExcludeDir )
                 lstVw_ExcludeDir.Items.Add(excludedir);
+        if ( lstVw_IncludeDir.Items.Count > 0 )
+            leftStatusText.Text = "Press 'Start Scan'";
+        else
+            leftStatusText.Text = "Add paths to 'Include Dir' list.";
     }
 
     public void closeMethod()
@@ -211,8 +226,47 @@ public partial class MainPage : Page
         if ( filesearch != null )
             filesearch.StopSearch();
     }
+    void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+    {
+        MyUserState state = e.UserState as MyUserState;
+        if ( state != null )
+        {
+            if ( state.Maximum >  0 )
+                pbStatus.Maximum = state.Maximum;
+            else
+                pbStatus.Maximum++;
+            if ( state.JobStatus != null )
+            {
+                leftStatusText.Text = state.LeftStatusText;
+                centerStatusText.Text = state.CenterStatusText;
+                if( state.JobStatus.Equals("Complete") )
+                    ShellViewModel.shellViewModel.OnMenuViewsDuplicateGroups();
+            }
+        }
+        lock ( pbStatus )
+        {
+            if ( e.ProgressPercentage == -1 )
+            {
+                pbStatus.Value++;
+                if ( pbStatus.Value > pbStatus.Maximum )
+                    pbStatus.Maximum = pbStatus.Maximum * 2;
+            }
+            else if ( e.ProgressPercentage > -1 )
+                pbStatus.Value = e.ProgressPercentage;
+        }
+    }
     private void StartScan_Click(object sender, System.Windows.RoutedEventArgs e)
     {
+        BackgroundWorker worker = new  (){ WorkerReportsProgress = true };
+        worker.DoWork += StartScanTask;
+        worker.ProgressChanged += worker_ProgressChanged;
+
+        worker.RunWorkerAsync();
+    }
+    private void StartScanTask(object sender, DoWorkEventArgs e)
+    {
+        lastSender = sender as BackgroundWorker;
+        lastSender.ReportProgress(0, new MyUserState { Maximum = 100, JobStatus = "StartScanTask", LeftStatusText = "", CenterStatusText = "" });
         if ( filesearch != null )
             filesearch.StopSearch();
         SaveLastState(lstVw_IncludeDir, ref IncludeDirLastState);
@@ -222,7 +276,7 @@ public partial class MainPage : Page
 #else
         int MaxParallel = -1;
 #endif
-        filesearch = new(IncludeDirLastState, ExcludeDirLastState, MaxParallel);
+        filesearch = new(IncludeDirLastState, ExcludeDirLastState, lastSender, MaxParallel);
         // filesearch.fileTypes = FileSearch.FileTypes.AudioFiles;
         filesearch.StartSearch();
         List<FileProperty> fileInfos = filesearch.GetFileList();
@@ -269,6 +323,6 @@ public partial class MainPage : Page
             });
         MediaFileDataService.SetMediaFileInfo(mediaFiles);
         Debug.WriteLine($"*****************Completed scan with {fileInfos.Count} items found.");
-        ShellViewModel.shellViewModel.OnMenuViewsDuplicateGroups();
+        lastSender.ReportProgress(-1, new MyUserState { Maximum = -1, JobStatus = "Complete", LeftStatusText = "San Complete", CenterStatusText = $"{fileInfos.Count} items found" });
     }
 }

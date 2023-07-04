@@ -5,6 +5,8 @@ using System.ComponentModel;
 using Microsoft.Extensions.FileProviders;
 using System.Xml.Linq;
 using System.Diagnostics;
+using AudioDuplicateFinder.FileUtils;
+using System.Reflection;
 
 namespace AudioDuplicateFinder.AudioUtils
 {
@@ -23,9 +25,21 @@ namespace AudioDuplicateFinder.AudioUtils
         private int comparedFrame = 0;
         private string missData="";
         private const int MAX_PROGRESS = 500;
-        private const string FftDataExt = ".fft.dat";
-        private const string FftTextExt = ".fft.txt";
+        private const int ProcessTimeOut = 10 * 60 * 1000; // Wait 10 minutes
+        private static string FfMpegPath = $"FFmpeg.bin{Path.DirectorySeparatorChar}ffmpeg.exe";
+
+        // Temporary File Naming variables
+        private const string FftDataExt = ".delete.me.fft.dat";
+        private const string FftTextExt = ".delete.me.fft.txt";
+        private const string FftTmpWavExt = ".delete.me.fft.wav";
         private static HashSet<string> cleanUpList = new ();
+        private static Dictionary<string, Guid> TempFileMap = new ();
+        private static string _WavTempFolder;
+        private static string TempWavFolderSub = "WavWorkingFolder";
+        private static string _ConvertedTempFolder;
+        private static string TempConvertedFolderSub = "ConvertedFilesFolder";
+
+        // Reusable ASYNC Stream Options
         private static FileStreamOptions _readFileStreamOptions;
         private static FileStreamOptions readFileStreamOptions
         {
@@ -62,15 +76,55 @@ namespace AudioDuplicateFinder.AudioUtils
         #endregion // Private Members
 
         #region Public Members
+        public static string WavTempFolder
+        {
+            get
+            {
+                if ( _WavTempFolder == null )
+                {
+                    lock ( TempWavFolderSub )
+                    {
+                        _WavTempFolder = $"{Files.AppTempFolder}{TempWavFolderSub}{Path.DirectorySeparatorChar}";
+                        if ( !Path.Exists(_WavTempFolder) )
+                            Directory.CreateDirectory(_WavTempFolder);
+                        else if ( Files.CleanPreviousSessionTempFiles )
+                            Files.DeleteDirectoryFiles(_WavTempFolder);
+                    }
+                }
+                return _WavTempFolder;
+            }
+            private set => _WavTempFolder = value;
+        }
+        public static string ConvertedTempFolder
+        {
+            get
+            {
+                if ( _ConvertedTempFolder == null )
+                {
+                    lock ( TempConvertedFolderSub )
+                    {
+                        _ConvertedTempFolder = $"{Files.AppTempFolder}{TempConvertedFolderSub}{Path.DirectorySeparatorChar}";
+                        if ( !Path.Exists(_ConvertedTempFolder) )
+                            Directory.CreateDirectory(_ConvertedTempFolder);
+                        else if ( Files.CleanPreviousSessionTempFiles )
+                            Files.DeleteDirectoryFiles(_ConvertedTempFolder);
+                    }
+                }
+                return _ConvertedTempFolder;
+            }
+            private set => _ConvertedTempFolder = value;
+        }
         public WaveFormat Format { get; private set; }// Returns the format header information.
         public int Count { get => samples.Length; }// Returns the number of samples.
         public float[] Amplitude { get => A; }// Returns the amplitude.
         public short this[int indexer] { get => samples[indexer]; set => samples[indexer] = value; }// Returns the sample at the given position.
         public short[] Samples { get => samples; }// Returns the wave samples.
-        public int NbFrame { get => nbframe; }// Returns the number of frame to be analyzed and displayed.
+        public int NbFrame { get => nbframe > 0 ? nbframe : 0; }// Returns the number of frame to be analyzed and displayed.
         public string Filename { get => filename; set => filename = value; }
         public int FFTPoint { set => fftPoint = value; }
         public int Frame { set => framelen = value; }
+        public FileInfo fileInfo { get; }
+        public string Ext { get; }
         #endregion // Public Members
 
         #region Constructors
@@ -88,21 +142,44 @@ namespace AudioDuplicateFinder.AudioUtils
             this.samples = samples;
         }
         /// <param name="fileName">The path of WAV file.</param>
-        public WaveSound(string fileName)
+        public WaveSound(FileInfo fi, bool IsValidWavFile = true)
         {
-            for (short i = -128; i < 0; i++)
+            for ( short i = -128 ; i < 0 ; i++ )
                 a[128 + i] = i;
-            for (short i = 0; i < 128; i++)
+            for ( short i = 0 ; i < 128 ; i++ )
                 a[128 + i] = i;
-
+            fileInfo = fi;
             firFilter = new FIRFilters();
-            filename = fileName;
-            samples = new short[4096];     
-            lock( cleanUpList )
+            filename = fileInfo.FullName;
+            Ext = fileInfo.Extension.ToLower();
+            if ( !IsValidWavFile )
             {
-                cleanUpList.Add(filename + FftDataExt);
-                cleanUpList.Add(filename + FftTextExt);
-            }        
+                string ConvertedFileName = GetTempFilePath(FftTmpWavExt, filename, true);
+                cleanUpList.Add(ConvertedFileName);
+                bool ConvertSuccess = false;
+                if ( ConvertToWavFile(ConvertedFileName) && File.Exists(ConvertedFileName) )
+                {
+                    FileInfo ConvertedFileInfo = new (ConvertedFileName);
+                    if ( ConvertedFileInfo.Length > 0 )
+                    {
+                        filename = ConvertedFileName;
+                        ConvertSuccess = true;
+                    }
+                    else
+                    {
+                        File.Delete(ConvertedFileName);
+                        filename = string.Empty;
+                    }
+                }
+                if ( ConvertSuccess == false )
+                    Debug.WriteLine($"Error: File {fi.FullName} failed conversion to {ConvertedFileName}.");
+            }
+            samples = new short[4096];
+            lock ( cleanUpList )
+            {
+                cleanUpList.Add(GetTempFilePath(FftDataExt));
+                cleanUpList.Add(GetTempFilePath(FftTextExt));
+            }
         }
         #endregion // Constructors
 
@@ -117,6 +194,56 @@ namespace AudioDuplicateFinder.AudioUtils
         }
 
         #region Functions to process WAV
+        private bool ConvertToWavFile(string ConvertedFileName)
+        {
+            if ( FileExtensions.AudioExtensions.Any(x => Ext.EndsWith(x)) )
+            {
+                string ArgStr = $"-y -i \"{filename}\" -vn -c:a pcm_u8 -ar 8000 -rematrix_maxval 1.0 -ac 1 -map 0:a:0? -sn -map_chapters 0 -map_metadata 0 -f wav -threads 0 \"{ConvertedFileName}\"";
+                ProcessStartInfo StartInfo = new ()
+                {
+                    Arguments = ArgStr,
+                    FileName = FfMpegPath,
+                    CreateNoWindow = true,
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    WindowStyle = ProcessWindowStyle.Hidden
+                };
+                ProcessStartInfo StartInfo_debug = new ()
+                {
+                    Arguments = ArgStr,
+                    FileName = FfMpegPath,
+                    CreateNoWindow = false,
+                    RedirectStandardInput = false,
+                    RedirectStandardOutput = false,
+                    RedirectStandardError = false,
+                    UseShellExecute = true,
+                    WindowStyle = ProcessWindowStyle.Hidden
+                };
+                Process p = new (){ StartInfo = StartInfo_debug };
+                p.StartInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                p.Start();
+                return p.WaitForExit(ProcessTimeOut);
+            }
+            return false;
+        }
+        public string GetTempFilePath(string DataExt, string FileName = null, bool UseConvertedFolder = false)
+        {
+            FileName ??= filename;
+            string ReturnStr;
+            lock ( TempFileMap )
+            {
+                if ( !TempFileMap.ContainsKey(filename) )
+                    TempFileMap[filename] = Guid.NewGuid();
+                if ( UseConvertedFolder )
+                    ReturnStr = ConvertedTempFolder + fileInfo.Name + "__" + TempFileMap[filename].ToString() + DataExt;
+                else
+                    ReturnStr = WavTempFolder + TempFileMap[filename].ToString() + DataExt;
+            }
+
+            return ReturnStr;
+        }
         public void ReadWavFileASync() // Reads a wave file by using background worker since it must report the progress.
         {
             // Create background worker and run it
@@ -137,11 +264,13 @@ namespace AudioDuplicateFinder.AudioUtils
         /// <returns></returns>
         public void bgw_DoWork(object sender = null, DoWorkEventArgs e = null)
         {
+            if ( filename == string.Empty )
+                return;
             try
             {
                 // Read WAV file and write FFT file
                 using ( BinaryReader reader = new(new FileStream(filename, readFileStreamOptions)) )
-                using ( BinaryWriter fft = new(File.Open(filename + FftDataExt, createFileStreamOptions)) )
+                using ( BinaryWriter fft = new(File.Open(GetTempFilePath(FftDataExt), createFileStreamOptions)) )
                 {
                     Format = ReadHeader(reader);
                     if ( Format.BitsPerSample != 8 && Format.BitsPerSample != 16 )
@@ -207,9 +336,9 @@ namespace AudioDuplicateFinder.AudioUtils
                         nbframe++;
                     }
 
-                    if ( nbframe == 0)
+                    if ( nbframe < 1)
                     {
-                        Debug.WriteLine($"Error: While processing '{filename}';\n**  nbframe value is zero; orgCountSamples={orgCountSamples}, countSamplesWas={countSamplesWas}, countSamples={countSamples}, framelen={framelen}, overlap={overlap}, di={di}, nbsi={nbsi}, si={si}, samples.Length={samples.Length}, b={b}, adv={adv}, bytesPerSample={bytesPerSample}, dataLength={dataLength}, b={b}");
+                        Debug.WriteLine($"Error: While processing '{filename}';\n**  nbframe value less then zero; orgCountSamples={orgCountSamples}, countSamplesWas={countSamplesWas}, countSamples={countSamples}, framelen={framelen}, overlap={overlap}, di={di}, nbsi={nbsi}, si={si}, samples.Length={samples.Length}, b={b}, adv={adv}, bytesPerSample={bytesPerSample}, dataLength={dataLength}, b={b}");
                     }
                     A = new float[fftPoint / 2]; //buffer hasil fft 1 frame (output applyFFT)
                     int channelSamplesIndex = 0;
@@ -458,21 +587,31 @@ namespace AudioDuplicateFinder.AudioUtils
         /// <returns>percentage of similarity</returns>
         public float Compare(WaveSound wf)
         {
+            if ( filename == string.Empty )
+            {
+                Debug.WriteLine($"Error: Failed comparison because filename empty for file {fileInfo.FullName}. Check for conversion error.");
+                return 0f;
+            }
+            if ( wf.filename == string.Empty )
+            {
+                Debug.WriteLine($"Error: Failed comparison because wf.filename empty for file {wf.fileInfo.FullName}. Check for conversion error.");
+                return 0f;
+            }
             int nbcorrect=0;
             int i=0;
 
             bool endfile = false;
             int a = 0, b = 0;
-            float[] frames = new float[nbframe > wf.nbframe ? nbframe : wf.nbframe];
-            comparedFrame = nbframe < wf.nbframe ? nbframe : wf.nbframe;
+            float[] frames = new float[NbFrame > wf.NbFrame ? NbFrame : wf.NbFrame];
+            comparedFrame = NbFrame < wf.NbFrame ? NbFrame : wf.NbFrame;
             short[] MissPlay = new short[comparedFrame];
             // int step = 0;
             //if (ProgressBar.Value != MAX_PROGRESS) step = (MAX_PROGRESS - ProgressBar.Value) / comparedFrame;
 
             // Open FFT file
-            using (BinaryReader f1 = new (File.Open(filename + FftDataExt, readFileStreamOptions)))
-            using (BinaryReader f2 = new (File.Open(wf.filename + FftDataExt, readFileStreamOptions)))
-            using (StreamWriter sw2 = new (wf.filename + FftTextExt, writeFileStreamOptions) )
+            using (BinaryReader f1 = new (File.Open(GetTempFilePath(FftDataExt), readFileStreamOptions)))
+            using (BinaryReader f2 = new (File.Open( GetTempFilePath(FftDataExt, wf.filename), readFileStreamOptions)))
+            using (StreamWriter sw2 = new (GetTempFilePath(FftTextExt, wf.filename), writeFileStreamOptions) )
             {
                 while (!endfile)
                 {

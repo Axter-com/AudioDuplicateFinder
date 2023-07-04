@@ -1,152 +1,388 @@
 ﻿<Page
+    x:Class="AudioDuplicateFinder.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:properties="clr-namespace:AudioDuplicateFinder.Properties"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-    x:Class="AudioDuplicateFinder.Views.MainPage"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:AudioDuplicateFinder.Properties"
+    Height="560"
+    d:DesignWidth="800"
     Style="{DynamicResource MahApps.Styles.Page}"
-    mc:Ignorable="d" d:DesignWidth="800" Height="527">
-    <Grid Margin="0,-44,0,44">
+    mc:Ignorable="d">
+    <Grid Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="17*"/>
-            <ColumnDefinition Width="64*"/>
-            <ColumnDefinition Width="719*"/>
+            <ColumnDefinition Width="17*" />
+            <ColumnDefinition Width="64*" />
+            <ColumnDefinition Width="719*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="48" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="250" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Grid
-            Margin="7,47,25,-149"
-            Background="{DynamicResource MahApps.Brushes.Gray10}" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <ListView x:Name="lstVw_ExcludeDir" ToolTip="Directories to EXCLUDE in scan" Margin="0,135,16,301" HorizontalAlignment="Right" Width="308">
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            Margin="0,0,5,0"
+            Background="{DynamicResource MahApps.Brushes.Gray10}">
+            <GroupBox
+                Width="329"
+                Margin="0,56,8,28"
+                HorizontalAlignment="Right">
+                <GroupBox.Header>
+                    <TextBlock FontWeight="Bold" Text="Excluded Directories" />
+                </GroupBox.Header>
+            </GroupBox>
+            <ListView
+                x:Name="lstVw_ExcludeDir"
+                Width="308"
+                Margin="0,135,16,32"
+                HorizontalAlignment="Right"
+                ToolTip="Directories to EXCLUDE in scan">
                 <ListView.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
                     </TransformGroup>
                 </ListView.RenderTransform>
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
-                        <EventSetter Event="Control.MouseDoubleClick" Handler="ExcludeDir_MouseDoubleClick"/>
+                        <EventSetter Event="Control.MouseDoubleClick" Handler="ExcludeDir_MouseDoubleClick" />
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
-            <Button x:Name="AddExcludeDir" ToolTip="Add a folder to EXCLUDE directories list" Height="36" Width="45" Click="AddExcludeDir_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,92,276,0" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+            <Button
+                x:Name="AddExcludeDir"
+                Width="45"
+                Height="36"
+                Margin="0,92,276,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="AddExcludeDir_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Add a folder to EXCLUDE directories list">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/FolderPlus_Red.48.png"/>
+                    <ImageBrush ImageSource="/Views/FolderPlus_Red.48.png" />
                 </Button.Background>
-                <TextBlock Foreground="DarkRed"><Run Text="Add"/></TextBlock>
+                <TextBlock Foreground="DarkRed"><Run Text="Add" /></TextBlock>
             </Button>
-            <GroupBox Margin="0,56,8,290" HorizontalAlignment="Right" Width="329">
+            <Button
+                x:Name="RemoveIncludeDir"
+                Width="45"
+                Height="36"
+                Margin="109,92,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="RemoveIncludeDir_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Remove selected directory in INCLUDE directories list">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderMinus.48.png" Stretch="Fill" />
+                </Button.Background>
+                <TextBlock Foreground="Orange"><Run Text="Remove" /></TextBlock>
+            </Button>
+            <Button
+                x:Name="EditIncludeDir"
+                Width="45"
+                Height="36"
+                Margin="59,92,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="EditIncludeDir_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Edit selected directory in INCLUDE directories list">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Views/FolderEdit.48.png" Stretch="Fill" />
+                </Button.Background>
+                <TextBlock Foreground="Orange"><Run Text="Edit" /></TextBlock>
+            </Button>
+            <GroupBox
+                Width="410"
+                Margin="0,56,0,28"
+                HorizontalAlignment="Left">
                 <GroupBox.Header>
-                    <TextBlock FontWeight="Bold" Text="Excluded Directories"/>
+                    <TextBlock FontWeight="Bold" Text="Included Directories" />
                 </GroupBox.Header>
             </GroupBox>
-            <GroupBox Margin="0,56,0,290" HorizontalAlignment="Left" Width="410">
-                <GroupBox.Header>
-                    <TextBlock FontWeight="Bold" Text="Included Directories"/>
-                </GroupBox.Header>
-            </GroupBox>
-            <Button x:Name="RemoveIncludeDir" ToolTip="Remove selected directory in INCLUDE directories list" HorizontalAlignment="Left" Margin="109,92,0,0" VerticalAlignment="Top" Height="36" Click="RemoveIncludeDir_Click" Width="45" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
-                <Button.Background>
-                    <ImageBrush ImageSource="/Views/FolderMinus.48.png" Stretch="Fill"/>
-                </Button.Background>
-                <TextBlock Foreground="Orange"><Run Text="Remove"/></TextBlock>
-            </Button>
-            <Button x:Name="EditIncludeDir" ToolTip="Edit selected directory in INCLUDE directories list" HorizontalAlignment="Left" Margin="59,92,0,0" VerticalAlignment="Top" Height="36" Width="45" Click="EditIncludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
-                <Button.Background>
-                    <ImageBrush ImageSource="/Views/FolderEdit.48.png" Stretch="Fill"/>
-                </Button.Background>
-                <TextBlock Foreground="Orange"><Run Text="Edit"/></TextBlock>
-            </Button>
-            <ListView x:Name="lstVw_IncludeDir" Margin="10,135,0,301" ToolTip="Directories to INCLUDE in scan" HorizontalAlignment="Left" Width="383">
+            <ListView
+                x:Name="lstVw_IncludeDir"
+                Width="383"
+                Margin="10,135,0,32"
+                HorizontalAlignment="Left"
+                ToolTip="Directories to INCLUDE in scan">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
-                        <EventSetter Event="Control.MouseDoubleClick" Handler="IncludeDir_MouseDoubleClick"/>
+                        <EventSetter Event="Control.MouseDoubleClick" Handler="IncludeDir_MouseDoubleClick" />
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
-            <Button x:Name="ClearAll_IncludeDir" ToolTip="Clear all directories in INCLUDE directories list" HorizontalAlignment="Left" Margin="159,92,0,0" VerticalAlignment="Top" Height="36" Width="45" Click="ClearAll_IncludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+            <Button
+                x:Name="ClearAll_IncludeDir"
+                Width="45"
+                Height="36"
+                Margin="159,92,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="ClearAll_IncludeDir_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Clear all directories in INCLUDE directories list">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/FolderClear.48.png" Stretch="Fill"/>
+                    <ImageBrush ImageSource="/Views/FolderClear.48.png" Stretch="Fill" />
                 </Button.Background>
-                <TextBlock Foreground="Orange"><Run Text="Clear"/></TextBlock>
+                <TextBlock Foreground="Orange"><Run Text="Clear" /></TextBlock>
             </Button>
-            <Button x:Name="ClearAll_ExcludeDir" ToolTip="Clear all directories in EXCLUDE directories list" HorizontalAlignment="Right" Margin="0,92,126,0" VerticalAlignment="Top" Height="36" Width="45" Click="ClearAll_ExcludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+            <Button
+                x:Name="ClearAll_ExcludeDir"
+                Width="45"
+                Height="36"
+                Margin="0,92,126,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="ClearAll_ExcludeDir_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Clear all directories in EXCLUDE directories list">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/FolderClear_Red.48.png"/>
+                    <ImageBrush ImageSource="/Views/FolderClear_Red.48.png" />
                 </Button.Background>
-                <TextBlock Foreground="DarkRed"><Run Text="Clear"/></TextBlock>
+                <TextBlock Foreground="DarkRed"><Run Text="Clear" /></TextBlock>
             </Button>
-            <Button x:Name="EditExcludeDir" ToolTip="Edit selected directory in EXCLUDE directories list" HorizontalAlignment="Right" Margin="0,92,226,0" VerticalAlignment="Top" Height="36" Width="45" Click="EditExcludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+            <Button
+                x:Name="EditExcludeDir"
+                Width="45"
+                Height="36"
+                Margin="0,92,226,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="EditExcludeDir_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Edit selected directory in EXCLUDE directories list">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/FolderEdit_Red.48.png"/>
+                    <ImageBrush ImageSource="/Views/FolderEdit_Red.48.png" />
                 </Button.Background>
-                <TextBlock Foreground="DarkRed"><Run Text="Edit"/></TextBlock>
+                <TextBlock Foreground="DarkRed"><Run Text="Edit" /></TextBlock>
             </Button>
-            <Button x:Name="RemoveExcludeDir" ToolTip="Remove selected directory in EXCLUDE directories list" HorizontalAlignment="Right" Margin="0,92,176,0" VerticalAlignment="Top" Height="36"  Width="45" Click="RemoveExcludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+            <Button
+                x:Name="RemoveExcludeDir"
+                Width="45"
+                Height="36"
+                Margin="0,92,176,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="RemoveExcludeDir_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Remove selected directory in EXCLUDE directories list">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/FolderMinus_Red.48.png"/>
+                    <ImageBrush ImageSource="/Views/FolderMinus_Red.48.png" />
                 </Button.Background>
-                <TextBlock Foreground="DarkRed"><Run Text="Remove"/></TextBlock>
+                <TextBlock Foreground="DarkRed"><Run Text="Remove" /></TextBlock>
             </Button>
-            <Button x:Name="AddIncludeDir" ToolTip="Add a folder to INCLUDE directories list" Height="36" Width="45" Click="AddIncludeDir_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,92,0,0" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+            <Button
+                x:Name="AddIncludeDir"
+                Width="45"
+                Height="36"
+                Margin="9,92,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="AddIncludeDir_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Add a folder to INCLUDE directories list">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/FolderPlus.48.png"/>
+                    <ImageBrush ImageSource="/Views/FolderPlus.48.png" />
                 </Button.Background>
-                <TextBlock Foreground="Orange"><Run Text="Add"/></TextBlock>
+                <TextBlock Foreground="Orange"><Run Text="Add" /></TextBlock>
             </Button>
-            <Button x:Name="StartScan" ToolTip="Start scanning for duplicate media files" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Top" Click="StartScan_Click" Height="51" Width="51" RenderTransformOrigin="0.5,1" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+            <Button
+                x:Name="StartScan"
+                Width="51"
+                Height="51"
+                Margin="3,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="StartScan_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                RenderTransformOrigin="0.5,1"
+                ToolTip="Start scanning for duplicate media files">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/Play.48.png"/>
+                    <ImageBrush ImageSource="/Views/Play.48.png" />
                 </Button.Background>
-                <TextBlock x:Name="StartScan1" TextWrapping="Wrap"><Run Text="Start Scan"/></TextBlock>
+                <TextBlock x:Name="StartScan1" TextWrapping="Wrap"><Run Text="Start Scan" /></TextBlock>
             </Button>
-            <Button x:Name="UndoIncludeDir" ToolTip="Undo last change in INCLUDE directories list" HorizontalAlignment="Left" Margin="209,92,0,0" VerticalAlignment="Top" Height="36" Width="45" Click="UndoIncludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+            <Button
+                x:Name="UndoIncludeDir"
+                Width="45"
+                Height="36"
+                Margin="209,92,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="UndoIncludeDir_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Undo last change in INCLUDE directories list">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/FolderUndo.48.png"/>
+                    <ImageBrush ImageSource="/Views/FolderUndo.48.png" />
                 </Button.Background>
-                <TextBlock Foreground="Orange"><Run Text="Undo"/></TextBlock>
+                <TextBlock Foreground="Orange"><Run Text="Undo" /></TextBlock>
             </Button>
-            <Button x:Name="ResetIncludeDir" ToolTip="Reset INCLUDE directories list to value on program startup" HorizontalAlignment="Left" Margin="262,92,0,0" VerticalAlignment="Top" Height="36" Width="45" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial" Click="ResetIncludeDir_Click">
+            <Button
+                x:Name="ResetIncludeDir"
+                Width="45"
+                Height="36"
+                Margin="262,92,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="ResetIncludeDir_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Reset INCLUDE directories list to value on program startup">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/FolderReset.48.png"/>
+                    <ImageBrush ImageSource="/Views/FolderReset.48.png" />
                 </Button.Background>
-                <TextBlock x:Name="ResetIncludeDir1" Foreground="Orange"><Run Text="Reset"/></TextBlock>
+                <TextBlock x:Name="ResetIncludeDir1" Foreground="Orange"><Run Text="Reset" /></TextBlock>
             </Button>
-            <Button x:Name="ResetExcludeDir" ToolTip="Reset EXCLUDE directories list to value on program startup" HorizontalAlignment="Right" Margin="0,92,24,0" VerticalAlignment="Top" Height="36" Width="46" Click="ResetExcludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial" RenderTransformOrigin="3.435,-6.38">
+            <Button
+                x:Name="ResetExcludeDir"
+                Width="46"
+                Height="36"
+                Margin="0,92,24,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="ResetExcludeDir_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                RenderTransformOrigin="3.435,-6.38"
+                ToolTip="Reset EXCLUDE directories list to value on program startup">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/FolderReset_Red.48.png"/>
+                    <ImageBrush ImageSource="/Views/FolderReset_Red.48.png" />
                 </Button.Background>
-                <TextBlock Foreground="DarkRed"><Run Text="Reset"/></TextBlock>
+                <TextBlock Foreground="DarkRed"><Run Text="Reset" /></TextBlock>
             </Button>
-            <Button x:Name="UndoExcludeDir" ToolTip="Undo last change in EXCLUDE directories list" HorizontalAlignment="Right" Margin="0,92,75,0" VerticalAlignment="Top" Height="36" Width="46" Click="UndoExcludeDir_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+            <Button
+                x:Name="UndoExcludeDir"
+                Width="46"
+                Height="36"
+                Margin="0,92,75,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="UndoExcludeDir_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Undo last change in EXCLUDE directories list">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/FolderUndo_Red.4.png"/>
+                    <ImageBrush ImageSource="/Views/FolderUndo_Red.4.png" />
                 </Button.Background>
-                <TextBlock Foreground="DarkRed"><Run Text="Undo"/></TextBlock>
+                <TextBlock Foreground="DarkRed"><Run Text="Undo" /></TextBlock>
             </Button>
-            <Button x:Name="StopScan" ToolTip="Stop Scan" HorizontalAlignment="Left" Margin="120,0,0,0" VerticalAlignment="Top" Height="51" Width="51" Click="StopScan_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+            <Button
+                x:Name="StopScan"
+                Width="51"
+                Height="51"
+                Margin="120,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="StopScan_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Stop Scan">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/StopSquare.48.png"/>
+                    <ImageBrush ImageSource="/Views/StopSquare.48.png" />
                 </Button.Background>
-                <TextBlock><Run Text="Stop"/></TextBlock>
+                <TextBlock><Run Text="Stop" /></TextBlock>
             </Button>
-            <Button x:Name="PauseScan" ToolTip="Pause Scan" HorizontalAlignment="Left" Margin="61,0,0,0" VerticalAlignment="Top" Height="51" Width="51" Click="PauseScan_Click" FontWeight="Normal" FontStyle="Italic" FontSize="8" FontFamily="Arial">
+            <Button
+                x:Name="PauseScan"
+                Width="51"
+                Height="51"
+                Margin="61,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="PauseScan_Click"
+                FontFamily="Arial"
+                FontSize="8"
+                FontStyle="Italic"
+                FontWeight="Normal"
+                ToolTip="Pause Scan">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Views/Pause.48.png"/>
+                    <ImageBrush ImageSource="/Views/Pause.48.png" />
                 </Button.Background>
-                <TextBlock><Run Text="Pause"/></TextBlock>
+                <TextBlock><Run Text="Pause" /></TextBlock>
             </Button>
-            <!--
-            The Mahapps Gray10 color represents where you should place your content.
-            Place your content here.
-            -->
+            <DockPanel
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="5"
+                VerticalAlignment="Bottom"
+                LastChildFill="False">
+                <StatusBar DockPanel.Dock="Bottom">
+                    <StatusBar.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="130" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="500*" />
+                                    <ColumnDefinition Width="150" />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ItemsPanelTemplate>
+                    </StatusBar.ItemsPanel>
+                    <StatusBarItem>
+                        <TextBlock Name="leftStatusText" />
+                    </StatusBarItem>
+                    <Separator Grid.Column="2" />
+                    <StatusBarItem Grid.Column="2">
+                        <TextBlock Name="centerStatusText" />
+                    </StatusBarItem>
+                    <Separator Grid.Column="3" />
+                    <StatusBarItem Grid.Column="3" Grid.ColumnSpan="2">
+                        <ProgressBar
+                            x:Name="pbStatus"
+                            Width="390"
+                            Height="16"
+                            Value="0" />
+                    </StatusBarItem>
+                </StatusBar>
+            </DockPanel>
         </Grid>
     </Grid>
 </Page>

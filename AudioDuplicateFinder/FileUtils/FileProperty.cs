@@ -45,10 +45,7 @@ namespace AudioDuplicateFinder.FileUtils
             {
                 lock( this )
                 {
-                    if ( _waveControl == null && Ext.EndsWith(".wav") ) 
-                    {
-                        _waveControl = new(FullPath);
-                    }
+                    _waveControl ??= new(fileInfo, Ext.EndsWith(".wav"));
                     return _waveControl;
                 }
             }
