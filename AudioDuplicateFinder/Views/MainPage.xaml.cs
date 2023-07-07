@@ -47,6 +47,29 @@ public partial class MainPage : Page
     private StringCollection ExcludeDirLastState = null;
     private FileSearch filesearch;
     private BackgroundWorker lastSender = null;
+    private bool HaveWarnUserOnChngListWhileScanning = false;
+    private bool _ScanInProgress = false;
+    private bool ScanInProgress 
+    {
+        get
+        {
+            if ( filesearch == null )
+                _ScanInProgress = false;
+            return _ScanInProgress;
+        }
+        set
+        {
+            if ( filesearch == null )
+                _ScanInProgress = false;
+            else
+            {
+                lock ( filesearch )
+                {
+                    _ScanInProgress = value;
+                }
+            }
+        }
+    }
     public MainPage(MainViewModel viewModel)
     {
         InitializeComponent();
@@ -62,6 +85,7 @@ public partial class MainPage : Page
             leftStatusText.Text = "Press 'Start Scan'";
         else
             leftStatusText.Text = "Add paths to 'Include Dir' list.";
+        SetButtonsToNormal();
     }
 
     public void closeMethod()
@@ -114,8 +138,11 @@ public partial class MainPage : Page
         }
         return false;
     }
+
     private void AddDirectory(CtrlListbox listBox, bool ReplaceItem = false)
     {
+        if ( CancelListChange() )
+            return;
         System.Windows.Forms.FolderBrowserDialog dlg = new();
         if ( ReplaceItem )
         {
@@ -142,12 +169,16 @@ public partial class MainPage : Page
 
     private void RemoveSelectedItem(CtrlListbox listBox)
     {
+        if ( CancelListChange() )
+            return;
         if ( listBox.SelectedIndex > -1 )
             listBox.Items.Remove(listBox.SelectedValue);
     }
 
     private void RemoveSelectedItem(System.Windows.Controls.ListView lstVw)
     {
+        if ( CancelListChange() )
+            return;
         if ( lstVw.SelectedIndex > -1 )
             lstVw.Items.Remove(lstVw.SelectedValue);
     }
@@ -164,6 +195,8 @@ public partial class MainPage : Page
 
     private void ResetIncludeDir_Click(object sender, System.Windows.RoutedEventArgs e)
     {
+        if ( CancelListChange() )
+            return;
         SaveLastState(lstVw_IncludeDir, ref IncludeDirLastState).Items.Clear();
         if ( Settings.Default.IncludeDir != null )
             foreach ( object includedir in Settings.Default.IncludeDir )
@@ -171,6 +204,8 @@ public partial class MainPage : Page
     }
     private void ClearAll_IncludeDir_Click(object sender, System.Windows.RoutedEventArgs e)
     {
+        if ( CancelListChange() )
+            return;
         SaveLastState(lstVw_IncludeDir, ref IncludeDirLastState).Items.Clear();
     }
 
@@ -178,6 +213,8 @@ public partial class MainPage : Page
     {
         if ( IncludeDirLastState != null )
         {
+            if ( CancelListChange() )
+                return;
             StringCollection IncludeDirLastState_temp = new ();
             foreach ( object includedir in lstVw_IncludeDir.Items )
                 IncludeDirLastState_temp.Add(includedir.ToString());
@@ -190,6 +227,8 @@ public partial class MainPage : Page
 
     private void ClearAll_ExcludeDir_Click(object sender, System.Windows.RoutedEventArgs e)
     {
+        if ( CancelListChange() )
+            return;
         SaveLastState(lstVw_ExcludeDir, ref ExcludeDirLastState).Items.Clear();
     }
 
@@ -197,6 +236,8 @@ public partial class MainPage : Page
     {
         if ( ExcludeDirLastState != null )
         {
+            if ( CancelListChange() )
+                return;
             StringCollection ExcludeDirLastState_temp = new ();
             foreach ( object Excludedir in lstVw_ExcludeDir.Items )
                 ExcludeDirLastState_temp.Add(Excludedir.ToString());
@@ -209,6 +250,8 @@ public partial class MainPage : Page
 
     private void ResetExcludeDir_Click(object sender, System.Windows.RoutedEventArgs e)
     {
+        if ( CancelListChange() )
+            return;
         SaveLastState(lstVw_ExcludeDir, ref ExcludeDirLastState).Items.Clear();
         if ( Settings.Default.IncludeDir != null )
             foreach ( object excludedir in Settings.Default.ExcludeDir )
@@ -217,14 +260,17 @@ public partial class MainPage : Page
 
     private void PauseScan_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-        if ( filesearch != null )
-            filesearch.PauseSearch();
+        if ( filesearch == null )
+            SetButtonsToNormal();
+        else
+            PauseOrResumeScan();
     }
 
     private void StopScan_Click(object sender, System.Windows.RoutedEventArgs e)
     {
         if ( filesearch != null )
             filesearch.StopSearch();
+        SetButtonsToNormal();
     }
     void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
     {
@@ -239,8 +285,11 @@ public partial class MainPage : Page
             {
                 leftStatusText.Text = state.LeftStatusText;
                 centerStatusText.Text = state.CenterStatusText;
-                if( state.JobStatus.Equals("Complete") )
+                if ( state.JobStatus.Equals("Complete") )
+                {
                     ShellViewModel.shellViewModel.OnMenuViewsDuplicateGroups();
+                    SetButtonsToNormal();
+                }
             }
         }
         lock ( pbStatus )
@@ -257,6 +306,7 @@ public partial class MainPage : Page
     }
     private void StartScan_Click(object sender, System.Windows.RoutedEventArgs e)
     {
+        SetButtonsToScanningState();
         BackgroundWorker worker = new  (){ WorkerReportsProgress = true };
         worker.DoWork += StartScanTask;
         worker.ProgressChanged += worker_ProgressChanged;
@@ -324,5 +374,35 @@ public partial class MainPage : Page
         MediaFileDataService.SetMediaFileInfo(mediaFiles);
         Debug.WriteLine($"*****************Completed scan with {fileInfos.Count} items found.");
         lastSender.ReportProgress(-1, new MyUserState { Maximum = -1, JobStatus = "Complete", LeftStatusText = "San Complete", CenterStatusText = $"{fileInfos.Count} items found" });
+    }
+    private void SetButtonsToNormal()
+    { // ToDo: Consider enabling and disabling all the ListView buttons, OR having all the button actions check if in scanning state, and if so give user a warning
+        ScanInProgress = false;
+        StartScan.IsEnabled = true;
+        PauseScan.IsEnabled = StopScan.IsEnabled = false;
+        PauseScan.Content = "";
+    }
+    private void SetButtonsToScanningState()
+    {
+        ScanInProgress = true;
+        StartScan.IsEnabled = false;
+        PauseScan.IsEnabled = StopScan.IsEnabled = true;
+        PauseScan.Content = "Pause";
+    }
+    private void PauseOrResumeScan()
+    {
+        SetButtonsToScanningState();
+        if (filesearch.PauseSearch())
+            PauseScan.Content = "Resume";
+    }
+    private bool CancelListChange()
+    {
+        if ( ScanInProgress && HaveWarnUserOnChngListWhileScanning == false )
+        {
+            HaveWarnUserOnChngListWhileScanning = true;
+            DialogResult result = MessageBox.Show("Changes to the list will not affect the currently running scan.\nThe changes will be included in the next scan.\nDo you still wish to continue changing the list?", "Scan In Progress", MessageBoxButtons.YesNo);
+            return result == DialogResult.No;
+        }
+        return false;
     }
 }

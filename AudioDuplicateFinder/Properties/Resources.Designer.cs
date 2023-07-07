@@ -79,6 +79,42 @@ namespace AudioDuplicateFinder.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select files for deletion (or move) based on user custom settings #1.
+        /// </summary>
+        public static string Custom1 {
+            get {
+                return ResourceManager.GetString("Custom1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select files for deletion (or move) based on user custom settings #2.
+        /// </summary>
+        public static string Custom2 {
+            get {
+                return ResourceManager.GetString("Custom2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select files for deletion (or move) based on user custom settings #3.
+        /// </summary>
+        public static string Custom3 {
+            get {
+                return ResourceManager.GetString("Custom3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duplicate Groups.
         /// </summary>
         public static string DuplicateGroupsPageTitle {
@@ -93,6 +129,24 @@ namespace AudioDuplicateFinder.Properties {
         public static string DuplicateListPageTitle {
             get {
                 return ResourceManager.GetString("DuplicateListPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ExcludedDirectories.
+        /// </summary>
+        public static string ExcludedDirectories {
+            get {
+                return ResourceManager.GetString("ExcludedDirectories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        public static string Filter {
+            get {
+                return ResourceManager.GetString("Filter", resourceCulture);
             }
         }
         
@@ -147,6 +201,15 @@ namespace AudioDuplicateFinder.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Included Directories.
+        /// </summary>
+        public static string IncludedDirectories {
+            get {
+                return ResourceManager.GetString("IncludedDirectories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sample Orders.
         /// </summary>
         public static string ListDetailsListDescription {
@@ -174,12 +237,39 @@ namespace AudioDuplicateFinder.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MoveFiles.
+        /// </summary>
+        public static string MoveFiles {
+            get {
+                return ResourceManager.GetString("MoveFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pause.
+        /// </summary>
+        public static string Pause {
+            get {
+                return ResourceManager.GetString("Pause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap Play_48 {
             get {
                 object obj = ResourceManager.GetObject("Play_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recycle.
+        /// </summary>
+        public static string Recycle {
+            get {
+                return ResourceManager.GetString("Recycle", resourceCulture);
             }
         }
         
@@ -194,7 +284,16 @@ namespace AudioDuplicateFinder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Settings page placeholder text.  Your app description goes here..
+        ///   Looks up a localized string similar to Resume.
+        /// </summary>
+        public static string Resume {
+            get {
+                return ResourceManager.GetString("Resume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This application finds duplicate audio files even if the files are in different formats or configurations..
         /// </summary>
         public static string SettingsPageAboutText {
             get {
@@ -203,7 +302,7 @@ namespace AudioDuplicateFinder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About this application.
+        ///   Looks up a localized string similar to About AudioDuplicateFinder.
         /// </summary>
         public static string SettingsPageAboutTitle {
             get {
@@ -230,7 +329,7 @@ namespace AudioDuplicateFinder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Privacy Statement.
+        ///   Looks up a localized string similar to AudioDuplicateFinder Home Page.
         /// </summary>
         public static string SettingsPagePrivacyStatementText {
             get {
@@ -311,6 +410,15 @@ namespace AudioDuplicateFinder.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GUI Settings.
+        /// </summary>
+        public static string ShellMenuItemFileSettingsPageHeaderTooltip {
+            get {
+                return ResourceManager.GetString("ShellMenuItemFileSettingsPageHeaderTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ContentGrid.
         /// </summary>
         public static string ShellMenuItemViewsContentGridPageHeader {
@@ -365,11 +473,389 @@ namespace AudioDuplicateFinder.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Main.
+        /// </summary>
+        public static string ShellMenuMain {
+            get {
+                return ResourceManager.GetString("ShellMenuMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display main view.
+        /// </summary>
+        public static string ShellMenuMain_ToolTip {
+            get {
+                return ResourceManager.GetString("ShellMenuMain_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Select.
+        /// </summary>
+        public static string ShellMenuSelect_Header {
+            get {
+                return ResourceManager.GetString("ShellMenuSelect_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto select files for deletion ( or move) based on selected criteria.
+        /// </summary>
+        public static string ShellMenuSelect_Header_ToolTip {
+            get {
+                return ResourceManager.GetString("ShellMenuSelect_Header_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Selection.
+        /// </summary>
+        public static string ShellMenuSelectCustomSelection {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectCustomSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make a custom selection setting.
+        /// </summary>
+        public static string ShellMenuSelectCustomSelection_ToolTip1 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectCustomSelection_ToolTip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select order of precedence for resolution, file size, time duration, file name length..
+        /// </summary>
+        public static string ShellMenuSelectCustomSelection_ToolTip2 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectCustomSelection_ToolTip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Also select if greater than or less than for each precedence..
+        /// </summary>
+        public static string ShellMenuSelectCustomSelection_ToolTip3 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectCustomSelection_ToolTip3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Highest Resolution.
+        /// </summary>
+        public static string ShellMenuSelectHighestResolution {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectHighestResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select duplicate files with the highest resolultion for deletion (or move)..
+        /// </summary>
+        public static string ShellMenuSelectHighestResolution_ToolTip1 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectHighestResolution_ToolTip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep files with the lowest resolution..
+        /// </summary>
+        public static string ShellMenuSelectHighestResolution_ToolTip2 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectHighestResolution_ToolTip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Largest File Size.
+        /// </summary>
+        public static string ShellMenuSelectLargeFileSize {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLargeFileSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select duplicate files with the largest file size for deletion (or move)..
+        /// </summary>
+        public static string ShellMenuSelectLargeFileSize_ToolTip1 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLargeFileSize_ToolTip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep files with the smallest file size..
+        /// </summary>
+        public static string ShellMenuSelectLargeFileSize_ToolTip2 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLargeFileSize_ToolTip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Longest Duration.
+        /// </summary>
+        public static string ShellMenuSelectLongestDuration {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLongestDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select duplicate files with the longest duration for deletion (or move)..
+        /// </summary>
+        public static string ShellMenuSelectLongestDuration_ToolTip1 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLongestDuration_ToolTip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep files with the shortest time (duration)..
+        /// </summary>
+        public static string ShellMenuSelectLongestDuration_ToolTip2 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLongestDuration_ToolTip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Longest File Name.
+        /// </summary>
+        public static string ShellMenuSelectLongestFileName {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLongestFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select duplicate files with the longest file names for deletion (or move)..
+        /// </summary>
+        public static string ShellMenuSelectLongestFileName_ToolTip1 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLongestFileName_ToolTip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep files with the shortest file name..
+        /// </summary>
+        public static string ShellMenuSelectLongestFileName_ToolTip2 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLongestFileName_ToolTip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Lowest Resolution.
+        /// </summary>
+        public static string ShellMenuSelectLowestResolution {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLowestResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select duplicate files with the lowest resolultion for deletion (or move).
+        /// </summary>
+        public static string ShellMenuSelectLowestResolution_ToolTip1 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLowestResolution_ToolTip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep files with the highest resolution..
+        /// </summary>
+        public static string ShellMenuSelectLowestResolution_ToolTip2 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLowestResolution_ToolTip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select lowest resolution, shortest duration, and shortest name.
+        /// </summary>
+        public static string ShellMenuSelectLowResShrtTimeShrtName {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLowResShrtTimeShrtName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select duplicate files with the lowest resolultion, shortest time, and shorter file name for deletion (or move)..
+        /// </summary>
+        public static string ShellMenuSelectLowResShrtTimeShrtName_ToolTip1 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLowResShrtTimeShrtName_ToolTip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep files with the highest resolution, longest time, and longer file name..
+        /// </summary>
+        public static string ShellMenuSelectLowResShrtTimeShrtName_ToolTip2 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLowResShrtTimeShrtName_ToolTip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolution has highest precedence and duration is only considered if same resolution..
+        /// </summary>
+        public static string ShellMenuSelectLowResShrtTimeShrtName_ToolTip3 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectLowResShrtTimeShrtName_ToolTip3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Shortest Duration.
+        /// </summary>
+        public static string ShellMenuSelectShortDuration {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectShortDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select duplicate files with the shortest duration for deletion (or move)..
+        /// </summary>
+        public static string ShellMenuSelectShortDuration_ToolTip1 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectShortDuration_ToolTip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep files with the longest time (duration)..
+        /// </summary>
+        public static string ShellMenuSelectShortDuration_ToolTip2 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectShortDuration_ToolTip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Shortest File Name.
+        /// </summary>
+        public static string ShellMenuSelectShortestFileName {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectShortestFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select duplicate files with the shortest file names for deletion (or move)..
+        /// </summary>
+        public static string ShellMenuSelectShortestFileName_ToolTip1 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectShortestFileName_ToolTip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep files with the longest file name..
+        /// </summary>
+        public static string ShellMenuSelectShortestFileName_ToolTip2 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectShortestFileName_ToolTip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select shortest duration, lowest resolution, and shortest name.
+        /// </summary>
+        public static string ShellMenuSelectShrtTimeLowResShrtName {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectShrtTimeLowResShrtName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select duplicate files with the shortest time, lowest resolultion, and shorter file name for deletion (or move)..
+        /// </summary>
+        public static string ShellMenuSelectShrtTimeLowResShrtName_ToolTip1 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectShrtTimeLowResShrtName_ToolTip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep files with the longest time, highest resolution, and longer file name..
+        /// </summary>
+        public static string ShellMenuSelectShrtTimeLowResShrtName_ToolTip2 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectShrtTimeLowResShrtName_ToolTip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration length has highest precedence and resolution is only considered if same time length..
+        /// </summary>
+        public static string ShellMenuSelectShrtTimeLowResShrtName_ToolTip3 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectShrtTimeLowResShrtName_ToolTip3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Smallest File Size.
+        /// </summary>
+        public static string ShellMenuSelectSmallFileSize {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectSmallFileSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select duplicate files with the smallest file size for deletion (or move)..
+        /// </summary>
+        public static string ShellMenuSelectSmallFileSize_ToolTip1 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectSmallFileSize_ToolTip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep files with the largest file size..
+        /// </summary>
+        public static string ShellMenuSelectSmallFileSize_ToolTip2 {
+            get {
+                return ResourceManager.GetString("ShellMenuSelectSmallFileSize_ToolTip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Views.
         /// </summary>
         public static string ShellMenuViewsHeader {
             get {
                 return ResourceManager.GetString("ShellMenuViewsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Scan.
+        /// </summary>
+        public static string StartScan {
+            get {
+                return ResourceManager.GetString("StartScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        public static string Stop {
+            get {
+                return ResourceManager.GetString("Stop", resourceCulture);
             }
         }
         

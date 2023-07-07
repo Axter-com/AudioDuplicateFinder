@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace AudioDuplicateFinder.ViewModels;
 
-// TODO: Change the URL for your privacy policy in the appsettings.json file, currently set to https://YourPrivacyUrlGoesHere
+// The privacy statement URL is in the appsettings.json file
 public class SettingsViewModel : ObservableObject, INavigationAware
 {
     private readonly AppConfig _appConfig;

@@ -124,10 +124,10 @@
     <value>Settings</value>
   </data>
   <data name="SettingsPageAboutText" xml:space="preserve">
-    <value>Settings page placeholder text.  Your app description goes here.</value>
+    <value>This application finds duplicate audio files even if the files are in different formats or configurations.</value>
   </data>
   <data name="SettingsPageAboutTitle" xml:space="preserve">
-    <value>About this application</value>
+    <value>About AudioDuplicateFinder</value>
   </data>
   <data name="SettingsPageChooseThemeText" xml:space="preserve">
     <value>Choose Theme</value>
@@ -136,7 +136,7 @@
     <value>Personalization</value>
   </data>
   <data name="SettingsPagePrivacyStatementText" xml:space="preserve">
-    <value>Privacy Statement</value>
+    <value>AudioDuplicateFinder Home Page</value>
   </data>
   <data name="SettingsPageRadioButtonDarkTheme" xml:space="preserve">
     <value>Dark</value>
@@ -168,12 +168,6 @@
   <data name="WebViewPageOpenInBrowserButtonTooltip" xml:space="preserve">
     <value>Open in browser (Ctrl + T)</value>
   </data>
-  <data name="ShellMenuItemViewsDuplicateListPageHeader" xml:space="preserve">
-    <value>Duplicate List</value>
-  </data>
-  <data name="DuplicateListPageTitle" xml:space="preserve">
-    <value>Duplicate List</value>
-  </data>
   <data name="ShellMenuItemViewsContentGridPageHeader" xml:space="preserve">
     <value>ContentGrid</value>
   </data>
@@ -188,6 +182,12 @@
   </data>
   <data name="ListDetailsListDescription" xml:space="preserve">
     <value>Sample Orders</value>
+  </data>
+  <data name="ShellMenuItemViewsDuplicateListPageHeader" xml:space="preserve">
+    <value>Duplicate List</value>
+  </data>
+  <data name="DuplicateListPageTitle" xml:space="preserve">
+    <value>Duplicate List</value>
   </data>
   <data name="ShellMenuItemViewsDuplicateGroupsPageHeader" xml:space="preserve">
     <value>Duplicate Groups</value>
@@ -240,5 +240,167 @@
   </data>
   <data name="Play_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\Play.48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ExcludedDirectories" xml:space="preserve">
+    <value>ExcludedDirectories</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="IncludedDirectories" xml:space="preserve">
+    <value>Included Directories</value>
+  </data>
+  <data name="MoveFiles" xml:space="preserve">
+    <value>MoveFiles</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Recycle" xml:space="preserve">
+    <value>Recycle</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+  <data name="ShellMenuItemFileSettingsPageHeaderTooltip" xml:space="preserve">
+    <value>GUI Settings</value>
+  </data>
+  <data name="ShellMenuMain" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="ShellMenuMain_ToolTip" xml:space="preserve">
+    <value>Display main view</value>
+  </data>
+  <data name="ShellMenuSelectCustomSelection" xml:space="preserve">
+    <value>Custom Selection</value>
+  </data>
+  <data name="ShellMenuSelectCustomSelection_ToolTip1" xml:space="preserve">
+    <value>Make a custom selection setting</value>
+  </data>
+  <data name="ShellMenuSelectCustomSelection_ToolTip2" xml:space="preserve">
+    <value>Select order of precedence for resolution, file size, time duration, file name length.</value>
+  </data>
+  <data name="ShellMenuSelectHighestResolution" xml:space="preserve">
+    <value>Select Highest Resolution</value>
+  </data>
+  <data name="ShellMenuSelectHighestResolution_ToolTip1" xml:space="preserve">
+    <value>Select duplicate files with the highest resolultion for deletion (or move).</value>
+  </data>
+  <data name="ShellMenuSelectLargeFileSize" xml:space="preserve">
+    <value>Select Largest File Size</value>
+  </data>
+  <data name="ShellMenuSelectLargeFileSize_ToolTip1" xml:space="preserve">
+    <value>Select duplicate files with the largest file size for deletion (or move).</value>
+  </data>
+  <data name="ShellMenuSelectLargeFileSize_ToolTip2" xml:space="preserve">
+    <value>Keep files with the smallest file size.</value>
+  </data>
+  <data name="ShellMenuSelectLongestDuration" xml:space="preserve">
+    <value>Select Longest Duration</value>
+  </data>
+  <data name="ShellMenuSelectLongestDuration_ToolTip1" xml:space="preserve">
+    <value>Select duplicate files with the longest duration for deletion (or move).</value>
+  </data>
+  <data name="ShellMenuSelectLongestDuration_ToolTip2" xml:space="preserve">
+    <value>Keep files with the shortest time (duration).</value>
+  </data>
+  <data name="ShellMenuSelectLongestFileName" xml:space="preserve">
+    <value>Select Longest File Name</value>
+  </data>
+  <data name="ShellMenuSelectLongestFileName_ToolTip1" xml:space="preserve">
+    <value>Select duplicate files with the longest file names for deletion (or move).</value>
+  </data>
+  <data name="ShellMenuSelectLongestFileName_ToolTip2" xml:space="preserve">
+    <value>Keep files with the shortest file name.</value>
+  </data>
+  <data name="ShellMenuSelectLowestResolution" xml:space="preserve">
+    <value>Select Lowest Resolution</value>
+  </data>
+  <data name="ShellMenuSelectLowestResolution_ToolTip1" xml:space="preserve">
+    <value>Select duplicate files with the lowest resolultion for deletion (or move)</value>
+  </data>
+  <data name="ShellMenuSelectLowestResolution_ToolTip2" xml:space="preserve">
+    <value>Keep files with the highest resolution.</value>
+  </data>
+  <data name="ShellMenuSelectLowResShrtTimeShrtName" xml:space="preserve">
+    <value>Select lowest resolution, shortest duration, and shortest name</value>
+  </data>
+  <data name="ShellMenuSelectLowResShrtTimeShrtName_ToolTip1" xml:space="preserve">
+    <value>Select duplicate files with the lowest resolultion, shortest time, and shorter file name for deletion (or move).</value>
+  </data>
+  <data name="ShellMenuSelectLowResShrtTimeShrtName_ToolTip2" xml:space="preserve">
+    <value>Keep files with the highest resolution, longest time, and longer file name.</value>
+  </data>
+  <data name="ShellMenuSelectLowResShrtTimeShrtName_ToolTip3" xml:space="preserve">
+    <value>Resolution has highest precedence and duration is only considered if same resolution.</value>
+  </data>
+  <data name="ShellMenuSelectShortDuration" xml:space="preserve">
+    <value>Select Shortest Duration</value>
+  </data>
+  <data name="ShellMenuSelectShortDuration_ToolTip1" xml:space="preserve">
+    <value>Select duplicate files with the shortest duration for deletion (or move).</value>
+  </data>
+  <data name="ShellMenuSelectShortDuration_ToolTip2" xml:space="preserve">
+    <value>Keep files with the longest time (duration).</value>
+  </data>
+  <data name="ShellMenuSelectShortestFileName" xml:space="preserve">
+    <value>Select Shortest File Name</value>
+  </data>
+  <data name="ShellMenuSelectShortestFileName_ToolTip1" xml:space="preserve">
+    <value>Select duplicate files with the shortest file names for deletion (or move).</value>
+  </data>
+  <data name="ShellMenuSelectShortestFileName_ToolTip2" xml:space="preserve">
+    <value>Keep files with the longest file name.</value>
+  </data>
+  <data name="ShellMenuSelectShrtTimeLowResShrtName" xml:space="preserve">
+    <value>Select shortest duration, lowest resolution, and shortest name</value>
+  </data>
+  <data name="ShellMenuSelectShrtTimeLowResShrtName_ToolTip1" xml:space="preserve">
+    <value>Select duplicate files with the shortest time, lowest resolultion, and shorter file name for deletion (or move).</value>
+  </data>
+  <data name="ShellMenuSelectShrtTimeLowResShrtName_ToolTip2" xml:space="preserve">
+    <value>Keep files with the longest time, highest resolution, and longer file name.</value>
+  </data>
+  <data name="ShellMenuSelectShrtTimeLowResShrtName_ToolTip3" xml:space="preserve">
+    <value>Duration length has highest precedence and resolution is only considered if same time length.</value>
+  </data>
+  <data name="ShellMenuSelectSmallFileSize" xml:space="preserve">
+    <value>Select Smallest File Size</value>
+  </data>
+  <data name="ShellMenuSelectSmallFileSize_ToolTip1" xml:space="preserve">
+    <value>Select duplicate files with the smallest file size for deletion (or move).</value>
+  </data>
+  <data name="ShellMenuSelectSmallFileSize_ToolTip2" xml:space="preserve">
+    <value>Keep files with the largest file size.</value>
+  </data>
+  <data name="ShellMenuSelect_Header" xml:space="preserve">
+    <value>_Select</value>
+  </data>
+  <data name="StartScan" xml:space="preserve">
+    <value>Start Scan</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="ShellMenuSelectCustomSelection_ToolTip3" xml:space="preserve">
+    <value>Also select if greater than or less than for each precedence.</value>
+  </data>
+  <data name="ShellMenuSelectHighestResolution_ToolTip2" xml:space="preserve">
+    <value>Keep files with the lowest resolution.</value>
+  </data>
+  <data name="Custom1" xml:space="preserve">
+    <value>Select files for deletion (or move) based on user custom settings #1</value>
+  </data>
+  <data name="Custom2" xml:space="preserve">
+    <value>Select files for deletion (or move) based on user custom settings #2</value>
+  </data>
+  <data name="Custom3" xml:space="preserve">
+    <value>Select files for deletion (or move) based on user custom settings #3</value>
+  </data>
+  <data name="ShellMenuSelect_Header_ToolTip" xml:space="preserve">
+    <value>Auto select files for deletion ( or move) based on selected criteria</value>
   </data>
 </root>

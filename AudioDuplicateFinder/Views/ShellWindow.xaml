@@ -59,7 +59,8 @@
                     </Grid.RowDefinitions>
                     <Menu Grid.Row="0" Focusable="False">
                         <MenuItem Header="{x:Static properties:Resources.ShellMenuFileHeader}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}">
-                            <MenuItem Header="{x:Static properties:Resources.ShellMenuItemFileSettingsPageHeader}" Command="{Binding MenuFileSettingsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
+                            <MenuItem Header="{x:Static properties:Resources.ShellMenuItemFileSettingsPageHeader}" Command="{Binding MenuFileSettingsCommand}" ToolTip="{x:Static properties:Resources.ShellMenuItemFileSettingsPageHeaderTooltip}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" >
+							</MenuItem>
                             <Separator />
                             <MenuItem Header="{x:Static properties:Resources.ShellMenuItemFileExitHeader}" Command="{Binding MenuFileExitCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
                         </MenuItem>
@@ -67,12 +68,199 @@
                             <!--TODO: Review the MenuItem headers in Resources.resx file for all of your views and place '_' before the letter that you want to use for menu keyboard usage-->
                             <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsMainPageHeader}" Command="{Binding MenuViewsMainCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
                             <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsDuplicateGroupsPageHeader}" Command="{Binding MenuViewsDuplicateGroupsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
+                            <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsDuplicateListPageHeader}" Command="{Binding MenuViewsDuplicateListCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
                             <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsListDetailsPageHeader}" Command="{Binding MenuViewsListDetailsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
                             <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsContentGridPageHeader}" Command="{Binding MenuViewsContentGridCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
-                            <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsDuplicateListPageHeader}" Command="{Binding MenuViewsDuplicateListCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
                             <MenuItem Header="{x:Static properties:Resources.ShellMenuItemViewsWebViewPageHeader}" Command="{Binding MenuViewsWebViewCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" />
                         </MenuItem>
-                    </Menu>
+						<MenuItem Header="{x:Static properties:Resources.ShellMenuSelect_Header}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" ToolTip="{x:Static properties:Resources.ShellMenuSelect_Header_ToolTip}" Visibility="{Binding SelectMenuVisibility}" >
+							<MenuItem Header="{x:Static properties:Resources.ShellMenuSelectLowResShrtTimeShrtName}" Command="{Binding OnMenuSelectLowResShrtTimeShrtName}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" >
+								<MenuItem.ToolTip>
+									<TextBlock>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectLowResShrtTimeShrtName_ToolTip1}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectLowResShrtTimeShrtName_ToolTip2}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectLowResShrtTimeShrtName_ToolTip3}"/>
+										<LineBreak/>
+										<InlineUIContainer>
+											<Image Source="/Views/img/Resolution_Monitor.64.png" />
+										</InlineUIContainer>
+										<InlineUIContainer>
+											<Image Source="/Views/img/TimeShort5Min.64.png" Width="64" Height="64" />
+										</InlineUIContainer>
+										<Run FontSize="16" FontWeight="Bold" Foreground="DarkBlue" Text="ABC&lt;&gt;ABCDEFG"/>										
+									</TextBlock>
+								</MenuItem.ToolTip>
+							</MenuItem>
+							<MenuItem Header="{x:Static properties:Resources.ShellMenuSelectShrtTimeLowResShrtName}" Command="{Binding MenuFileSettingsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" >
+								<MenuItem.ToolTip>
+									<TextBlock>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectShrtTimeLowResShrtName_ToolTip1}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectShrtTimeLowResShrtName_ToolTip2}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectShrtTimeLowResShrtName_ToolTip3}"/>
+										<LineBreak/>
+										<InlineUIContainer>
+											<Image Source="/Views/img/TimeShort5Min.64.png" Width="64" Height="64" />
+										</InlineUIContainer>
+										<InlineUIContainer>
+											<Image Source="/Views/img/Resolution_Monitor.64.png" />
+										</InlineUIContainer>
+										<Run FontSize="16" FontWeight="Bold" Foreground="DarkBlue" Text="ABC&lt;&gt;ABCDEFG"/>										
+									</TextBlock>
+								</MenuItem.ToolTip>
+							</MenuItem>
+							<Separator />
+							<MenuItem Header="{x:Static properties:Resources.ShellMenuSelectLowestResolution}" Command="{Binding MenuFileSettingsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" >
+								<MenuItem.Icon><Image Source="/Views/img/Resolution_MonitorLessThan.64.png" Width="32" Height="32" /></MenuItem.Icon>
+								<MenuItem.ToolTip>
+									<TextBlock>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectLowestResolution_ToolTip1}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectLowestResolution_ToolTip2}"/>
+										<LineBreak/>
+										<InlineUIContainer>
+											<Image Source="/Views/img/Resolution_Monitor.64.png" />
+										</InlineUIContainer>
+										<Run FontSize="90" FontWeight="Bold" Foreground="DarkBlue" Text="&lt;"/>
+									</TextBlock>
+								</MenuItem.ToolTip>
+							</MenuItem>
+							<MenuItem Header="{x:Static properties:Resources.ShellMenuSelectHighestResolution}" Command="{Binding MenuFileSettingsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" >
+								<MenuItem.Icon><Image Source="/Views/img/Resolution_MonitorGreaterThan.64.png" Width="32" Height="32" /></MenuItem.Icon>
+								<MenuItem.ToolTip>
+									<TextBlock>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectHighestResolution_ToolTip1}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectLowestResolution_ToolTip2}"/>
+										<LineBreak/>
+										<InlineUIContainer>
+											<Image Source="/Views/img/Resolution_Monitor.64.png" />
+										</InlineUIContainer>
+										<Run FontSize="90" FontWeight="Bold" Foreground="DarkBlue" Text="&gt;"/>
+									</TextBlock>
+								</MenuItem.ToolTip>
+							</MenuItem>
+							<MenuItem Header="{x:Static properties:Resources.ShellMenuSelectShortDuration}" Command="{Binding MenuFileSettingsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" >
+								<MenuItem.Icon><Image Source="/Views/img/TimeShort5Min.64.png" Width="32" Height="32" /></MenuItem.Icon>
+								<MenuItem.ToolTip>
+									<TextBlock>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectShortDuration_ToolTip1}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectShortDuration_ToolTip2}"/>
+										<LineBreak/>
+										<InlineUIContainer>
+											<Image Source="/Views/img/TimeShort5Min.64.png" />
+										</InlineUIContainer>
+										<Run FontSize="90" FontWeight="Bold" Foreground="DarkBlue" Text="&lt;"/>
+									</TextBlock>
+								</MenuItem.ToolTip>
+							</MenuItem>
+							<MenuItem Header="{x:Static properties:Resources.ShellMenuSelectLongestDuration}" Command="{Binding MenuFileSettingsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" >
+								<MenuItem.Icon><Image Source="/Views/img/TimeShort5MinGreaterThan.64.png" Width="32" Height="32" /></MenuItem.Icon>
+								<MenuItem.ToolTip>
+									<TextBlock>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectLongestDuration_ToolTip1}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectLongestDuration_ToolTip2}"/>
+										<LineBreak/>
+										<InlineUIContainer>
+											<Image Source="/Views/img/TimeShort5Min.64.png" />
+										</InlineUIContainer>
+										<Run FontSize="90" FontWeight="Bold" Foreground="DarkBlue" Text="&gt;"/>
+									</TextBlock>
+								</MenuItem.ToolTip>
+							</MenuItem>
+							<MenuItem Header="{x:Static properties:Resources.ShellMenuSelectSmallFileSize}" Command="{Binding MenuFileSettingsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" >
+								<MenuItem.Icon><Image Source="/Views/img/Measure_SizeZLessThan.64.png" Width="32" Height="32" /></MenuItem.Icon>
+								<MenuItem.ToolTip>
+									<TextBlock>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectSmallFileSize_ToolTip1}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectSmallFileSize_ToolTip2}"/>
+										<LineBreak/>
+										<InlineUIContainer>
+											<Image Source="/Views/img/Measure_SizeZ.64.png" Width="64" Height="64" />
+										</InlineUIContainer>
+										<Run FontSize="90" FontWeight="Bold" Foreground="DarkBlue" Text="&lt;"/>
+									</TextBlock>
+								</MenuItem.ToolTip>
+							</MenuItem>
+							<MenuItem Header="{x:Static properties:Resources.ShellMenuSelectLargeFileSize}" Command="{Binding MenuFileSettingsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" >
+								<MenuItem.Icon><Image Source="/Views/img/Measure_SizeZGreaterThan.64.png" Width="32" Height="32" /></MenuItem.Icon>
+								<MenuItem.ToolTip>
+									<TextBlock>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectLargeFileSize_ToolTip1}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectLargeFileSize_ToolTip2}"/>
+										<LineBreak/>
+										<InlineUIContainer>
+											<Image Source="/Views/img/Measure_SizeZ.64.png" Width="64" Height="64" />
+										</InlineUIContainer>
+										<Run FontSize="90" FontWeight="Bold" Foreground="DarkBlue" Text="&gt;"/>
+									</TextBlock>
+								</MenuItem.ToolTip>
+							</MenuItem>
+							<MenuItem Header="{x:Static properties:Resources.ShellMenuSelectShortestFileName}" Command="{Binding MenuFileSettingsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" >
+								<MenuItem.ToolTip>
+									<TextBlock>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectShortestFileName_ToolTip1}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectShortestFileName_ToolTip2}"/>
+										<LineBreak/>
+										<Run FontSize="16" FontWeight="Bold" Foreground="DarkBlue" Text="ABC&lt;ABCDEFG"/>
+									</TextBlock>
+								</MenuItem.ToolTip>
+							</MenuItem>
+							<MenuItem Header="{x:Static properties:Resources.ShellMenuSelectLongestFileName}" Command="{Binding MenuFileSettingsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" >
+								<MenuItem.ToolTip>
+									<TextBlock>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectLongestFileName_ToolTip1}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectLongestFileName_ToolTip2}"/>
+										<LineBreak/>
+										<Run FontSize="16" FontWeight="Bold" Foreground="DarkBlue" Text="ABCDEFG&gt;ABC"/>
+									</TextBlock>
+								</MenuItem.ToolTip>
+							</MenuItem>
+							<Separator />
+							<MenuItem Header="{x:Static properties:Resources.ShellMenuSelectCustomSelection}" Command="{Binding MenuFileSettingsCommand}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" >
+								<MenuItem.Icon><Image Source="/Views/img/SettingsControlsCartoon.64.png" Width="32" Height="32" /></MenuItem.Icon>
+								<MenuItem.ToolTip>
+									<TextBlock>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectCustomSelection_ToolTip1}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectCustomSelection_ToolTip2}"/>
+										<LineBreak/>
+										<Run Text="{x:Static properties:Resources.ShellMenuSelectCustomSelection_ToolTip2}"/>
+										<LineBreak/>
+										<InlineUIContainer>
+											<Image Source="/Views/img/Resolution_MonitorLessThan.64.png" Width="32" Height="32" />
+										</InlineUIContainer>
+										<InlineUIContainer>
+											<Image Source="/Views/img/Resolution_MonitorGreaterThan.64.png" Width="32" Height="32" />
+										</InlineUIContainer>
+										<InlineUIContainer>
+											<Image Source="/Views/img/TimeShort5Min.64.png" Width="32" Height="32" />
+										</InlineUIContainer>
+										<InlineUIContainer>
+											<Image Source="/Views/img/TimeShort5MinGreaterThan.64.png" Width="32" Height="32" />
+										</InlineUIContainer>
+										<InlineUIContainer>
+											<Image Source="/Views/img/Measure_SizeZLessThan.64.png" Width="32" Height="32" />
+										</InlineUIContainer>
+										<InlineUIContainer>
+											<Image Source="/Views/img/Measure_SizeZGreaterThan.64.png" Width="32" Height="32" />
+										</InlineUIContainer>
+										<Run FontSize="16" FontWeight="Bold" Foreground="DarkBlue" Text="ABC&lt;&gt;ABCDEFG"/>
+									</TextBlock>
+								</MenuItem.ToolTip>
+							</MenuItem>
+						</MenuItem>
+						<MenuItem Header="{x:Static properties:Resources.ShellMenuMain}" Command="{Binding MenuViewsMainCommand}" ToolTip="{x:Static properties:Resources.ShellMenuMain_ToolTip}" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource Self}}" Visibility="{Binding SelectMenuVisibility}" />
+					</Menu>
                     <Frame
                         Grid.Row="1"
                         x:Name="shellFrame"

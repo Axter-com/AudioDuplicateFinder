@@ -1,33 +1,203 @@
 ﻿<Page
     x:Class="AudioDuplicateFinder.Views.DuplicateGroupsPage"
-    Style="{DynamicResource MahApps.Styles.Page}"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
-    xmlns:local="clr-namespace:AudioDuplicateFinder"  
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:AudioDuplicateFinder"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:AudioDuplicateFinder.Properties"
-    mc:Ignorable="d"
-    d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="0,0,-72,-125">
-        <ListView ItemsSource="{Binding MediaFileItems}" SelectedItem="{Binding Path=Selected}">
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Style="{DynamicResource MahApps.Styles.Page}"
+    mc:Ignorable="d">
+    <Grid Margin="0,0,0,0">
+        <Button
+            x:Name="DeleteToRecycleBinSelectedItems"
+            Width="48"
+            Height="48"
+            Margin="4,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Arial"
+            FontSize="8"
+            FontStyle="Italic"
+            FontWeight="Normal"
+            ToolTip="Move selected items to recycle bin">
+            <Button.Background>
+                <ImageBrush ImageSource="/Views/img/Recycle_Bin_FullOfMedia.64.png" />
+            </Button.Background>
+            <TextBlock Foreground="Gray"><Run Text="Recycle" /></TextBlock>
+        </Button>
+        <Button
+            x:Name="DeletePermanentSelectedItems"
+            Width="48"
+            Height="48"
+            Margin="54,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Arial"
+            FontSize="8"
+            FontStyle="Italic"
+            FontWeight="Normal"
+            ToolTip="Permanent delete selected items">
+            <Button.Background>
+                <ImageBrush ImageSource="/Views/img/FolderCartoon_Media_Delete.64.png" />
+            </Button.Background>
+            <TextBlock Foreground="Yellow"><Run Text="Delete" /></TextBlock>
+        </Button>
+        <Button
+            x:Name="MoveSelectedItems"
+            Width="48"
+            Height="48"
+            Margin="104,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Arial"
+            FontSize="8"
+            FontStyle="Italic"
+            FontWeight="Normal"
+            ToolTip="Move selected items to a target folder">
+            <Button.Background>
+                <ImageBrush ImageSource="/Views/img/FolderCartoon_Media_Move.64.png" />
+            </Button.Background>
+            <TextBlock Margin="-2,-10,0,0" Foreground="Green"><Run Text="Move Files" /></TextBlock>
+        </Button>
+        <Button
+            x:Name="FilterList"
+            Width="48"
+            Height="48"
+            Margin="154,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Arial"
+            FontSize="8"
+            FontStyle="Italic"
+            FontWeight="Normal"
+            ToolTip="Apply Filter to List&#x0a;List only files applicable to keyword(s).">
+            <Button.Background>
+                <ImageBrush ImageSource="/Views/img/FolderCartoon_Media_Filter.64.png" />
+            </Button.Background>
+            <TextBlock Margin="0,-2,0,0" Foreground="LightBlue"><Run Text="Apply&#x0a;Filter" /></TextBlock>
+        </Button>
+        <Rectangle
+            Width="2"
+            HorizontalAlignment="Left"
+            Margin="208,0,0,0"
+            VerticalAlignment="Stretch"
+            Fill="Gray" />
+        <Button
+            x:Name="SelectLowResolution"
+            Width="48"
+            Height="48"
+            Margin="214,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Arial"
+            FontSize="8"
+            FontStyle="Italic"
+            FontWeight="Normal"
+            ToolTip="{x:Static properties:Resources.ShellMenuSelectLowestResolution_ToolTip1}">
+            <Button.Background>
+                <ImageBrush ImageSource="/Views/img/Resolution_Monitor.64.png" />
+            </Button.Background>
+            <TextBlock Foreground="Gray"><Run Text="Low&#x0a;Res" /></TextBlock>
+        </Button>
+        <Button
+            x:Name="SelectCustomOption1"
+            Width="48"
+            Height="48"
+            Margin="264,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Arial"
+            FontSize="8"
+            FontStyle="Italic"
+            FontWeight="Normal"
+            ToolTip="{x:Static properties:Resources.Custom1}">
+            <Button.Background>
+                <ImageBrush ImageSource="/Views/img/SettingsControlsCartoon1.64.png" />
+            </Button.Background>
+            <TextBlock Foreground="Gray"><Run Text="Custom1" /></TextBlock>
+        </Button>
+        <Button
+            x:Name="SelectCustomOption2"
+            Width="48"
+            Height="48"
+            Margin="314,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Arial"
+            FontSize="8"
+            FontStyle="Italic"
+            FontWeight="Normal"
+            ToolTip="{x:Static properties:Resources.Custom2}">
+            <Button.Background>
+                <ImageBrush ImageSource="/Views/img/SettingsControlsCartoon2.64.png" />
+            </Button.Background>
+            <TextBlock Foreground="Gray"><Run Text="Custom2" /></TextBlock>
+        </Button>
+        <Button
+            x:Name="SelectCustomOption3"
+            Width="48"
+            Height="48"
+            Margin="364,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Arial"
+            FontSize="8"
+            FontStyle="Italic"
+            FontWeight="Normal"
+            ToolTip="{x:Static properties:Resources.Custom3}">
+            <Button.Background>
+                <ImageBrush ImageSource="/Views/img/SettingsControlsCartoon3.64.png" />
+            </Button.Background>
+            <TextBlock Margin="-4,0,0,0" Foreground="Gray"><Run Text="Custom3" /></TextBlock>
+        </Button>
+        <ListView
+            Margin="0,52,0,0"
+            ItemsSource="{Binding MediaFileItems}"
+            SelectedItem="{Binding Path=Selected}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn  Header="[x]">
+                    <GridViewColumn Header="[x]">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsChecked}"/>
+                                <CheckBox IsChecked="{Binding IsChecked}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Ext" Width="50" DisplayMemberBinding="{Binding Ext}" />
-                    <GridViewColumn Header="Size" Width="50" DisplayMemberBinding="{Binding Size}" />
-                    <GridViewColumn Header="Time" Width="50" DisplayMemberBinding="{Binding Duration}" />
-                    <GridViewColumn Header="Read" Width="50" DisplayMemberBinding="{Binding IsReadOnly}" />
-                    <GridViewColumn Header="DirectoryName" Width="200" DisplayMemberBinding="{Binding DirectoryName}" />
-                    <GridViewColumn Header="Group GUID" Width="240" DisplayMemberBinding="{Binding GUID}" />
-                    <GridViewColumn Header="Path" Width="500" DisplayMemberBinding="{Binding FullPath}" />
+                    <GridViewColumn
+                        Width="200"
+                        DisplayMemberBinding="{Binding Name}"
+                        Header="Name" />
+                    <GridViewColumn
+                        Width="50"
+                        DisplayMemberBinding="{Binding Ext}"
+                        Header="Ext" />
+                    <GridViewColumn
+                        Width="50"
+                        DisplayMemberBinding="{Binding Size}"
+                        Header="Size" />
+                    <GridViewColumn
+                        Width="50"
+                        DisplayMemberBinding="{Binding Duration}"
+                        Header="Time" />
+                    <GridViewColumn
+                        Width="50"
+                        DisplayMemberBinding="{Binding IsReadOnly}"
+                        Header="Read" />
+                    <GridViewColumn
+                        Width="200"
+                        DisplayMemberBinding="{Binding DirectoryName}"
+                        Header="DirectoryName" />
+                    <GridViewColumn
+                        Width="240"
+                        DisplayMemberBinding="{Binding GUID}"
+                        Header="Group GUID" />
+                    <GridViewColumn
+                        Width="500"
+                        DisplayMemberBinding="{Binding FullPath}"
+                        Header="Path" />
                 </GridView>
             </ListView.View>
             <ListView.GroupStyle>
@@ -40,10 +210,36 @@
                                         <Expander IsExpanded="True">
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text=" Group Index" FontSize="14" Foreground="Gray" />
-                                                    <TextBlock Text=" [" FontSize="20" Foreground="Gray" /><TextBlock Text="{Binding Name}" FontWeight="DemiBold" FontSize="20"/><TextBlock Text="] " FontSize="20" Foreground="Gray" />
-                                                    <TextBlock Text="Total Group Duplicates" FontSize="14" Foreground="Gray"  Margin="10,0,0,0" />
-                                                    <TextBlock Text=" (" FontSize="18" Foreground="Gray" /><TextBlock Text="{Binding ItemCount}" FontSize="18"/><TextBlock Text=")" FontSize="18" Foreground="Gray" />
+                                                    <TextBlock
+                                                        FontSize="14"
+                                                        Foreground="Gray"
+                                                        Text=" Group Index" />
+                                                    <TextBlock
+                                                        FontSize="20"
+                                                        Foreground="Gray"
+                                                        Text=" [" />
+                                                    <TextBlock
+                                                        FontSize="20"
+                                                        FontWeight="DemiBold"
+                                                        Text="{Binding Name}" />
+                                                    <TextBlock
+                                                        FontSize="20"
+                                                        Foreground="Gray"
+                                                        Text="] " />
+                                                    <TextBlock
+                                                        Margin="10,0,0,0"
+                                                        FontSize="14"
+                                                        Foreground="Gray"
+                                                        Text="Total Group Duplicates" />
+                                                    <TextBlock
+                                                        FontSize="18"
+                                                        Foreground="Gray"
+                                                        Text=" (" />
+                                                    <TextBlock FontSize="18" Text="{Binding ItemCount}" />
+                                                    <TextBlock
+                                                        FontSize="18"
+                                                        Foreground="Gray"
+                                                        Text=")" />
                                                 </StackPanel>
                                             </Expander.Header>
                                             <ItemsPresenter />

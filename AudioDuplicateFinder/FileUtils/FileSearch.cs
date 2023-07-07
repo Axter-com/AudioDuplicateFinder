@@ -273,7 +273,7 @@ namespace AudioDuplicateFinder.FileUtils
 
         }
         public void StopSearch() => cts.Cancel();
-        public void PauseSearch() => OnHold = !OnHold;
+        public bool PauseSearch() => OnHold = !OnHold;
 
         // //////////////////////////////////////////////////////////////////////////////////////////////
         // Private data members

@@ -16,6 +16,21 @@ namespace AudioDuplicateFinder.ViewModels;
 public class ShellViewModel : ObservableObject
 {
     public static ShellViewModel shellViewModel { get; private set ; } = null;
+    public bool booleanToSelectMenuVisibilityConverter = false;
+    private Visibility _SelectMenuVisibility = Visibility.Hidden;
+    public Visibility SelectMenuVisibility
+    {
+        get
+        {
+            return _SelectMenuVisibility;
+        }
+        set
+        {
+            _SelectMenuVisibility = value;
+
+            OnPropertyChanged("SelectMenuVisibility");
+        }
+    }
     private readonly INavigationService _navigationService;
     private readonly IRightPaneService _rightPaneService;
 
@@ -76,17 +91,26 @@ public class ShellViewModel : ObservableObject
     public ICommand MenuViewsMainCommand => _menuViewsMainCommand ?? (_menuViewsMainCommand = new RelayCommand(OnMenuViewsMain));
 
     public void OnMenuViewsMain()
-        => _navigationService.NavigateTo(typeof(MainViewModel).FullName, null, true);
+    {
+        SelectMenuVisibility = Visibility.Hidden;
+        _navigationService.NavigateTo(typeof(MainViewModel).FullName, null, true);
+    }
 
     public ICommand MenuViewsDuplicateGroupsCommand => _menuViewsDuplicateGroupsCommand ?? (_menuViewsDuplicateGroupsCommand = new RelayCommand(OnMenuViewsDuplicateGroups));
 
     public void OnMenuViewsDuplicateGroups()
-        => _navigationService.NavigateTo(typeof(DuplicateGroupsViewModel).FullName, null, true);
+    {
+        SelectMenuVisibility = Visibility.Visible;
+        _navigationService.NavigateTo(typeof(DuplicateGroupsViewModel).FullName, null, true);
+    }
 
     public ICommand MenuViewsListDetailsCommand => _menuViewsListDetailsCommand ?? (_menuViewsListDetailsCommand = new RelayCommand(OnMenuViewsListDetails));
 
     public void OnMenuViewsListDetails()
-        => _navigationService.NavigateTo(typeof(ListDetailsViewModel).FullName, null, true);
+    {
+        SelectMenuVisibility = Visibility.Visible;
+        _navigationService.NavigateTo(typeof(ListDetailsViewModel).FullName, null, true);
+    }
 
     public ICommand MenuViewsContentGridCommand => _menuViewsContentGridCommand ?? (_menuViewsContentGridCommand = new RelayCommand(OnMenuViewsContentGrid));
 
@@ -96,7 +120,10 @@ public class ShellViewModel : ObservableObject
     public ICommand MenuViewsDuplicateListCommand => _menuViewsDuplicateListCommand ?? (_menuViewsDuplicateListCommand = new RelayCommand(OnMenuViewsDuplicateList));
 
     public void OnMenuViewsDuplicateList()
-        => _navigationService.NavigateTo(typeof(DuplicateListViewModel).FullName, null, true);
+    {
+        SelectMenuVisibility = Visibility.Visible;
+        _navigationService.NavigateTo(typeof(DuplicateListViewModel).FullName, null, true);
+    }
 
     public ICommand MenuViewsWebViewCommand => _menuViewsWebViewCommand ?? (_menuViewsWebViewCommand = new RelayCommand(OnMenuViewsWebView));
 
@@ -105,4 +132,15 @@ public class ShellViewModel : ObservableObject
 
     public void OnMenuFileSettings()
         => _rightPaneService.OpenInRightPane(typeof(SettingsViewModel).FullName);
+    public void OnMenuSelectLowResShrtTimeShrtName() => OnMenuViewsMain();
+    public void OnMenuSelectShrtTimeLowResShrtName() => OnMenuViewsMain();
+    public void OnMenuSelectLowestResolution() => OnMenuViewsMain();
+    public void OnMenuSelectHighestResolution() => OnMenuViewsMain();
+    public void OnMenuSelectShortDuration() => OnMenuViewsMain();
+    public void OnMenuSelectLongestDuration() => OnMenuViewsMain();
+    public void OnMenuSelectSmallFileSize() => OnMenuViewsMain();
+    public void OnMenuSelectLargeFileSize() => OnMenuViewsMain();
+    public void OnMenuSelectShortestFileName() => OnMenuViewsMain();
+    public void OnMenuSelectLongestFileName() => OnMenuViewsMain();
+    public void OnMenuSelectCustomSelection() => OnMenuViewsMain();
 }
